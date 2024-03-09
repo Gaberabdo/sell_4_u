@@ -25,7 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "categories": MessageLookupByLibrary.simpleMessage("فئات"),
         "homeWelcome": MessageLookupByLibrary.simpleMessage("مرحبا بك"),
         "nearYou": MessageLookupByLibrary.simpleMessage("بالقرب منك"),
-        "search": MessageLookupByLibrary.simpleMessage("البحث"),
+        "search": MessageLookupByLibrary.simpleMessage("البحث اي شئ"),
         "seeAll": MessageLookupByLibrary.simpleMessage("اظهار الكل")
       };
 }

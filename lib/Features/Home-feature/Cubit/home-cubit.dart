@@ -1,68 +1,50 @@
-// import 'package:flutter_bloc/flutter_bloc.dart';
-//
-//
-// import '../../../core/helper/dio-helper.dart';
-// import 'home-state.dart';
-//
-// class HomeCubit extends Cubit<HomeState> {
-//   HomeCubit() : super(HomeInitialState());
-//
-//   static HomeCubit get(context) => BlocProvider.of(context);
-//
-//
-//
-// Future<void> createPoduct(
-//   {
-//     required String productName,
-//
-//
-//     required double salary,
-// }
-//     )async{
-//   emit(LoadingProductState());
-//   final response=await DioHelper.postData(url: Constant.CreateProduct, data: {
-//     "name":productName,
-//     "categoryName":"coffee",
-//     "salary":salary
-//
-//
-//   },
-//   token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWU5YTEwYmQwYzdkMjYxMWE1NzE4ZmUiLCJuYW1lIjoi2KfYr9mF2YYiLCJlbWFpbCI6ImFkbWluMTJAZ21haWwuY29tIiwiaWF0IjoxNzA5ODEwNTgwfQ.15etdlpuy5Sph9Q_tiDA9Fxpsuy0G9dE1MkkluoNZs8');
-//
-//   if(response.statusCode==200){
-//
-//     emit(SuccessProductState());
-//   }else if (response.statusCode == 401) {
-//     // Handle unauthorized access (invalid credentials)
-//     emit(ErrorProducrState());
-//   } else {
-//     // Handle other status codes
-//     emit(ErrorProducrState());
-//   }
-// }
-//   ///product?=coffee
-// ProductModel ?model;
-//   Future<void> GetProduct() async {
-//     emit(LoadinggetProducrState());
-//
-//     try {
-//       final response = await DioHelper.getData(
-//         url: 'https://sales-project-main.onrender.com/product?=coffee',
-//         data: {},
-//       );
-//
-//       if (response.statusCode == 200) {
-//         model = ProductModel.fromJson(response.data as Map<String, dynamic>);
-//         emit(SuccessgetProducrState());
-//       } else {
-//         emit(ErrorgetProducrState());
-//       }
-//     } catch (error) {
-//       print(error.toString());
-//       emit(ErrorgetProducrState());
-//     }
-//   }
-//
-//
-//
-// }
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sell_4_u/Features/Home-feature/view/screens/home/feeds_screen.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sell_4_u/core/constant.dart';
+import 'package:iconly/iconly.dart';
+
+import 'home-state.dart';
+
+class HomeCubit extends Cubit<HomeState> {
+  HomeCubit() : super(HomeInitialState());
+
+  static HomeCubit get(context) => BlocProvider.of(context);
+
+  List<Widget> screens = [
+    const FeedsScreen(),
+    const Column(),
+    const Column(),
+    const Column(),
+    const Column(),
+  ];
+  int selectedIndex = 0;
+  List<BottomNavigationBarItem> item = [
+    BottomNavigationBarItem(
+      icon: const Icon(IconlyLight.home),
+      label: isArabic() ? 'الرئيسية' : 'Home',
+    ),
+    BottomNavigationBarItem(
+      icon: const Icon(Icons.sell_outlined),
+      label: isArabic() ? 'تجاري' : 'Commercials',
+    ),
+    BottomNavigationBarItem(
+      icon: const Icon(Icons.add_to_photos_outlined),
+      label: isArabic() ? 'أضف إعلانات' : 'Post an Ad',
+    ),
+    BottomNavigationBarItem(
+      icon: const Icon(IconlyLight.search),
+      label: isArabic() ? 'البحث' : 'Search',
+    ),
+    BottomNavigationBarItem(
+      icon: const Icon(Icons.account_circle_outlined),
+      label: isArabic() ? 'حسابي' : 'Account',
+    ),
+  ];
+
+  void onItemTapped(int index) {
+    selectedIndex = index;
+    emit(ChangeItemIndex());
+  }
+}
