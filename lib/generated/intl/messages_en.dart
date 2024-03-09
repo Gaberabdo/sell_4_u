@@ -25,7 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "categories": MessageLookupByLibrary.simpleMessage("Categories"),
         "homeWelcome": MessageLookupByLibrary.simpleMessage("Welcome"),
         "nearYou": MessageLookupByLibrary.simpleMessage("Near you"),
-        "search": MessageLookupByLibrary.simpleMessage("Search"),
+        "search": MessageLookupByLibrary.simpleMessage("Search for anything"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See All")
       };
 }
