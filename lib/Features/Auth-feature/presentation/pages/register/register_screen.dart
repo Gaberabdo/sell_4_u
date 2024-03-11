@@ -1,42 +1,86 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart.';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sell_4_u/Features/Auth-feature/presentation/pages/register/otp-sceen.dart';
+import 'package:sell_4_u/Features/Home-feature/view/screens/home/feeds_screen.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 
 import '../../../../../core/helper/cache/cache_helper.dart';
+
+
+
 import '../../../../../core/helper/component/component.dart';
-
-
 import '../login/login_screen.dart';
 
 import 'cubit/register_cubit.dart';
 import 'cubit/register_states.dart';
 
-class RegisterScreen extends StatelessWidget {
-  RegisterScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatefulWidget {
+  RegisterScreen({required this.phoneNumber}) ;
+  String phoneNumber;
 
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  @override
+  void initState() {
+    print(widget.phoneNumber);
+   phoneController.text=widget.phoneNumber;
+    super.initState();
+  }
   var globalFormKey = GlobalKey<FormState>();
+
   var emailController = TextEditingController();
+
   var passwordController = TextEditingController();
+
   var nameController = TextEditingController();
+
   var phoneController = TextEditingController();
+
   var imageController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => RegisterCubit(),
       child: BlocConsumer<RegisterCubit, RegisterState>(
         listener: (context, state) {
-          if (state is SuccessCreateUserState) {
-            // navigatorTo(
-            //   context,
-            //   HomePage(),
-            // );
-            CacheHelper.saveData(
-              key: 'uId',
-              value: state.uId,
+
+          if(state is SuccessRegisterState){
+            showTopSnackBar(
+              Overlay.of(context),
+              CustomSnackBar.success(
+                message:'Register success',
+              ),
             );
+            navigatorTo(context, HomeFeeds());
+
+          }
+          if(state is ErrorVerifyState){
+            showTopSnackBar(
+              Overlay.of(context),
+              CustomSnackBar.error(
+                message:state.errorMessage!,
+              ),
+            );
+          }
+          if(state is ErrorRegisterState){
+            showTopSnackBar(
+              Overlay.of(context),
+              CustomSnackBar.error(
+                message:'Error in Register',
+              ),
+            );
+
           }
         },
         builder: (context, state) {
@@ -66,11 +110,7 @@ class RegisterScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(20.0),
                         child: Column(
                           children: [
-                            ClipPath(
-                              child: Image.asset('assest/images/photo_2024-02-28_16-51-32.jpg',
-                                height: 200,),
 
-                            ),
                             const SizedBox(
                               height: 25,
                             ),
@@ -105,10 +145,6 @@ class RegisterScreen extends StatelessWidget {
                             const SizedBox(
                               height: 10,
                             ),
-
-                            const SizedBox(
-                              height: 10,
-                            ),
                             TextFormField(
                               cursorColor: Colors.black,
                               controller: emailController,
@@ -122,11 +158,43 @@ class RegisterScreen extends StatelessWidget {
                               },
                               keyboardAppearance: Brightness.dark,
                               decoration: InputDecoration(
-                                  labelText: 'Email',
+                                labelText: 'Email',
+                                labelStyle: GoogleFonts.eduNswActFoundation(
+                                    fontSize: 20, color: Colors.black),
+                                prefixIcon: const Icon(
+                                  Icons.email_outlined,
+                                  color: Colors.black,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12), // Set the border radius
+                                  borderSide: BorderSide.none, // Remove the border
+                                ),
+                                filled: true,
+                                fillColor: Colors.grey.shade200,
+                              ),
+                            ),
+
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            TextFormField(
+                              cursorColor: Colors.black,
+                              controller: phoneController,
+                              keyboardType: TextInputType.phone,
+                              obscureText: false,
+                              validator: (String? value) {
+                                if (value!.isEmpty) {
+                                  return 'please enter your phone ';
+                                }
+                                return null;
+                              },
+                              keyboardAppearance: Brightness.dark,
+                              decoration: InputDecoration(
+                                  labelText: 'phone',
                                   labelStyle: GoogleFonts.eduNswActFoundation(
                                       fontSize: 20, color: Colors.black),
                                   prefixIcon: const Icon(
-                                    Icons.email_outlined,
+                                    Icons.phone,
                                     color: Colors.black,
                                   ),
                                 border: OutlineInputBorder(
@@ -186,17 +254,18 @@ class RegisterScreen extends StatelessWidget {
                                 height: 45,
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                    color: Colors.green.shade700,
+                                    color: Colors.blue.shade200,
                                     borderRadius: BorderRadius.circular(12)
                                 ),
                                 child: MaterialButton(
 
                                   onPressed: () {
-                                    // Navigator.push(context, MaterialPageRoute(builder: (context){
-                                    //   return HomePage();
-                                    // }));
-
+                                    if (globalFormKey.currentState!.validate()) {
+                                     cubit.PhoneVerifyFirst(phoneNumber:'+20${phoneController.text}');
+                                     navigatorTo(context, OtpScreen(phoneNumber: '+20${phoneController.text}',email: emailController.text,name: nameController.text,));
+                                    }
                                   },
+
                                   child: Text(
                                     'Sign Up',
                                     style: GoogleFonts.poppins(
@@ -222,7 +291,7 @@ class RegisterScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                    "Don’t have an account? ",
+                                    "Already have account ",
                                     style: GoogleFonts.poppins(
                                       fontSize: 14,
 
@@ -246,6 +315,77 @@ class RegisterScreen extends StatelessWidget {
                                 )
                               ],
                             ),
+                            const SizedBox(
+                              height: 15.0,
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Divider(
+                                    height: 1,
+
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                Text('Sign up with',
+                                  style: TextStyle(
+                                    fontSize: 16
+
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Divider(
+                                    height: 1,
+
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+
+                              children: [
+
+                                InkWell(
+                                  onTap: (){
+                                    cubit.signInWithFacebook(phoneNumber: phoneController.text);
+                                  },
+                                  child: Container(
+                                    height: 55,
+                                    width: 55,
+                                    padding: EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        color: Colors.grey.shade300
+                                    ),
+                                    child: Center(child: FaIcon(FontAwesomeIcons.facebook,size: 35,)),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 100,
+                                ),
+                                InkWell(
+                                  onTap: (){
+                                    cubit.signInWithGoogle(phoneNumber: phoneController.text);
+                                  },
+                                  child: Container(
+                                    height: 55,
+                                    width: 55,
+                                    padding: EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        color: Colors.grey.shade300
+                                    ),
+                                    child: Center(child: FaIcon(FontAwesomeIcons.google,size: 30,)),
+                                  ),
+                                ),
+
+                              ],
+                            )
 
                           ],
                         ),
