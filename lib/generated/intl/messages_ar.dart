@@ -22,10 +22,35 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "CreateAccount": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
+        "Email": MessageLookupByLibrary.simpleMessage("ايميل"),
+        "Name": MessageLookupByLibrary.simpleMessage("الاسم"),
+        "Or": MessageLookupByLibrary.simpleMessage("او"),
+        "Password": MessageLookupByLibrary.simpleMessage("باسورد"),
+        "Phone": MessageLookupByLibrary.simpleMessage("تليفون"),
+        "alreadyHaveAccount":
+            MessageLookupByLibrary.simpleMessage("لديك حساب بالفعل"),
         "categories": MessageLookupByLibrary.simpleMessage("فئات"),
+        "completeSignUp": MessageLookupByLibrary.simpleMessage("اكمال التسجيل"),
+        "donthave": MessageLookupByLibrary.simpleMessage("ليس لديك حساب??"),
+        "forgetPassword":
+            MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور"),
         "homeWelcome": MessageLookupByLibrary.simpleMessage("مرحبا بك"),
         "nearYou": MessageLookupByLibrary.simpleMessage("بالقرب منك"),
+        "pleaseEmail":
+            MessageLookupByLibrary.simpleMessage("من فضلك ادخل ايميلك"),
+        "pleaseName": MessageLookupByLibrary.simpleMessage("من فضلك ادخل اسمك"),
+        "pleasePassword":
+            MessageLookupByLibrary.simpleMessage("من فضلك ادخل الباسورد"),
+        "pleasePhone":
+            MessageLookupByLibrary.simpleMessage("من فضلك ادخل تليفونك"),
         "search": MessageLookupByLibrary.simpleMessage("البحث اي شئ"),
-        "seeAll": MessageLookupByLibrary.simpleMessage("اظهار الكل")
+        "seeAll": MessageLookupByLibrary.simpleMessage("اظهار الكل"),
+        "sign": MessageLookupByLibrary.simpleMessage("تسجيل  "),
+        "signIn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "signWithFace": MessageLookupByLibrary.simpleMessage(
+            "تسجيل الدخول بأستخدام فيس بوك "),
+        "signWithgoogle":
+            MessageLookupByLibrary.simpleMessage("تسجيل الدخول بأستخدام جوجل ")
       };
 }

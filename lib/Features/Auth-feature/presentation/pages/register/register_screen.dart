@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sell_4_u/Features/Auth-feature/presentation/pages/register/otp-sceen.dart';
 import 'package:sell_4_u/Features/Home-feature/view/screens/home/feeds_screen.dart';
+import 'package:sell_4_u/generated/l10n.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
@@ -90,7 +91,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             appBar: AppBar(
               elevation: 0,
               backgroundColor: Colors.transparent,
-              title: Text('Sign Up',
+              title: Text(S.of(context).CreateAccount,
                 style: GoogleFonts.poppins(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
@@ -121,13 +122,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               obscureText: false,
                               validator: (String? value) {
                                 if (value!.isEmpty) {
-                                  return 'please enter your full name';
+                                  return S.of(context).pleaseName;
                                 }
                                 return null;
                               },
                               keyboardAppearance: Brightness.dark,
                               decoration: InputDecoration(
-                                  labelText: 'Name',
+                                  labelText: S.of(context).Name,
                                   labelStyle: GoogleFonts.eduNswActFoundation(
                                       fontSize: 20, color: Colors.black),
                                   prefixIcon: const Icon(
@@ -152,13 +153,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               obscureText: false,
                               validator: (String? value) {
                                 if (value!.isEmpty) {
-                                  return 'please enter your email address';
+                                  return S.of(context).pleaseEmail;
                                 }
                                 return null;
                               },
                               keyboardAppearance: Brightness.dark,
                               decoration: InputDecoration(
-                                labelText: 'Email',
+                                labelText: S.of(context).Email,
                                 labelStyle: GoogleFonts.eduNswActFoundation(
                                     fontSize: 20, color: Colors.black),
                                 prefixIcon: const Icon(
@@ -184,13 +185,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               obscureText: false,
                               validator: (String? value) {
                                 if (value!.isEmpty) {
-                                  return 'please enter your phone ';
+                                  return S.of(context).pleasePhone;
                                 }
                                 return null;
                               },
                               keyboardAppearance: Brightness.dark,
                               decoration: InputDecoration(
-                                  labelText: 'phone',
+                                  labelText:S.of(context).Phone,
                                   labelStyle: GoogleFonts.eduNswActFoundation(
                                       fontSize: 20, color: Colors.black),
                                   prefixIcon: const Icon(
@@ -211,17 +212,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             TextFormField(
                               cursorColor: Colors.black,
                               controller: passwordController,
+                              obscureText: cubit.isPassword,
                               keyboardType: TextInputType.emailAddress,
 
                               validator: (String? value) {
                                 if (value!.isEmpty) {
-                                  return 'please enter your email password';
+                                  return S.of(context).pleasePassword;
                                 }
                                 return null;
                               },
                               keyboardAppearance: Brightness.dark,
                               decoration: InputDecoration(
-                                  labelText: 'password',
+                                  labelText: S.of(context).Password,
                                   labelStyle: GoogleFonts.eduNswActFoundation(
                                       fontSize: 20, color: Colors.black),
                                   suffixIcon: IconButton(
@@ -267,7 +269,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   },
 
                                   child: Text(
-                                    'Sign Up',
+                                    S.of(context).CreateAccount,
                                     style: GoogleFonts.poppins(
                                       fontSize: 16,
                                       color: Colors.white,
@@ -291,7 +293,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                    "Already have account ",
+                                    S.of(context).alreadyHaveAccount,
                                     style: GoogleFonts.poppins(
                                       fontSize: 14,
 
@@ -304,8 +306,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     }));
                                   },
                                   child: Text(
-                                      "Sign In ",
-                                      style: GoogleFonts.poppins(
+                                     S.of(context).signIn,
+                                      style: GoogleFonts.tajawal(
                                           fontSize: 14,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w700
@@ -327,7 +329,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     color: Colors.grey,
                                   ),
                                 ),
-                                Text('Sign up with',
+                                Text(S.of(context).Or,
                                   style: TextStyle(
                                     fontSize: 16
 

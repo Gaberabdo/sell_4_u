@@ -18,9 +18,9 @@ class OtpScreen extends StatelessWidget {
 
   final TextEditingController pinController = TextEditingController();
 
-  String? phoneNumber;
-  String? name;
-  String? email;
+  String phoneNumber;
+  String name;
+  String email;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +29,7 @@ class OtpScreen extends StatelessWidget {
       child: BlocConsumer<RegisterCubit, RegisterState>(
         listener: (context, state) {
           if (state is SuccessRegisterState) {
+            print('succcccces');
             showTopSnackBar(
               Overlay.of(context),
               CustomSnackBar.success(
@@ -154,8 +155,8 @@ class OtpScreen extends StatelessWidget {
                       onPressed: () {
                         String otp = pinController.text;
                         print('Entered OTP: $otp');
-                        cubit.PhoneVerify(phoneNumber: phoneNumber!, otp: otp);
-                        cubit.storeUserDataInFirestorephone(name!, email!, phoneNumber!);
+                        cubit.PhoneVerify(phoneNumber: phoneNumber, otp: otp,email: email,name: name);
+
                       },
                       child: Text(
                         'verify Phone',

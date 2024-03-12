@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sell_4_u/Features/Auth-feature/presentation/pages/register/register_screen.dart';
 
+import '../../../../../generated/l10n.dart';
+
 class PhoneScreen extends StatelessWidget {
    PhoneScreen({super.key});
   var phoneController = TextEditingController();
@@ -14,7 +16,7 @@ class PhoneScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: Text('Sign Up',
+        title: Text(S.of(context).CreateAccount,
           style: GoogleFonts.poppins(
             fontSize: 18,
             fontWeight: FontWeight.w700,
@@ -39,13 +41,13 @@ class PhoneScreen extends StatelessWidget {
                 obscureText: false,
                 validator: (String? value) {
                   if (value!.isEmpty) {
-                    return 'please enter your phone ';
+                    return S.of(context).pleasePhone;
                   }
                   return null;
                 },
                 keyboardAppearance: Brightness.dark,
                 decoration: InputDecoration(
-                  labelText: 'phone',
+                  labelText: S.of(context).Phone,
                   labelStyle: GoogleFonts.eduNswActFoundation(
                       fontSize: 20, color: Colors.black),
                   prefixIcon: const Icon(
@@ -81,7 +83,7 @@ class PhoneScreen extends StatelessWidget {
                   },
 
                   child: Text(
-                    'Complete Sign Up',
+                    S.of(context).completeSignUp,
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                       color: Colors.white,

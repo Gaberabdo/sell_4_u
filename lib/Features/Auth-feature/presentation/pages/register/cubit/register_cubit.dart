@@ -51,36 +51,34 @@ class RegisterCubit extends Cubit<RegisterState> {
     }
   }
 
-  Future<void> createUserInFirestore(User? user,{required String phoneNumber}) async {
+  Future<void> createUserInFirestore(User? user, {required String phoneNumber}) async {
     try {
       if (user != null) {
+        final CollectionReference users = FirebaseFirestore.instance.collection('users');
+        UserModel model = UserModel(
+          name: user.displayName,
+          email: user.email,
+          phone: phoneNumber,
+          uId: user.uid,
+          image: 'https://www.freepik.com/free-vector/illustration-user-avatar-icon_2606572.htm#fromView=search&page=1&position=47&uuid=ea28f8ef-cff6-485a-8f1a-efde5332f9a1'
+        );
 
-        final CollectionReference users =
-        FirebaseFirestore.instance.collection('users');
 
-
-        await users.doc(user.uid).set({
-          'uid': user.uid,
-          'displayName': user.displayName,
-          'email': user.email,
-          'phone':phoneNumber
-
-        });
+        await users.doc(user.uid).set(model.toMap());
 
         print('User ${user.uid} added to Firestore');
         emit(SuccessCreateUserState(user.uid));
-
       } else {
         emit(ErrorCreateUserState());
         print('User is null, unable to create document in Firestore');
-
       }
     } catch (e) {
       emit(ErrorCreateUserState());
       print('Error creating user document: $e');
     }
   }
-///sign up with Google
+
+  ///sign up with Google
 
   Future<UserCredential> signInWithGoogle({required String phoneNumber}) async {
     try {
@@ -118,57 +116,68 @@ class RegisterCubit extends Cubit<RegisterState> {
     }
   }
 
-  Future<void> storeUserDataInFirestore(User? user,{required String phoneNumber}) async {
+  Future<void> storeUserDataInFirestore(User? user, {required String phoneNumber}) async {
     try {
       if (user == null) {
         throw Exception('User is null');
       }
 
-
       final CollectionReference users = FirebaseFirestore.instance.collection('users');
+      UserModel model = UserModel(
+        name: user.displayName,
+        email: user.email,
+        phone: phoneNumber,
+        uId: user.uid,
+        image: 'https://www.freepik.com/free-vector/illustration-user-avatar-icon_2606572.htm#fromView=search&page=1&position=47&uuid=ea28f8ef-cff6-485a-8f1a-efde5332f9a1'
+      );
 
+      await users.doc(user.uid).set(model.toMap());
 
-      await users.doc(user.uid).set({
-        'uid': user.uid,
-        'displayName': user.displayName,
-        'email': user.email,
-      'phone':phoneNumber,
-      });
-
-      print('User ${user.uid} added to Firestore');
+      print('User data stored in Firestore for UID: ${user.uid}');
     } catch (e) {
       print('Error storing user data in Firestore: $e');
       throw Exception('Failed to store user data in Firestore');
     }
   }
+
   ///sign up using phone
-Future<void>PhoneVerify({required String phoneNumber,required String otp})async{
-  await FirebaseAuth.instance.verifyPhoneNumber(
-    phoneNumber:phoneNumber ,
-    verificationCompleted: (PhoneAuthCredential credential) async{
-      await FirebaseAuth.instance.signInWithCredential(credential);
-    },
-    verificationFailed: (FirebaseAuthException e) {
-      if (e.code == 'invalid-phone-number') {
-        print('The provided phone number is not valid.');
-      }
-    },
-    codeSent: (String verificationId, int? resendToken) async{
-      String smsCode = otp;
+  Future<void> PhoneVerify({
+    required String phoneNumber,
+    required String otp,
+    required String name,
+    required String email,
+  }) async {
+    try {
+      await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: phoneNumber,
+        verificationCompleted: (PhoneAuthCredential credential) async {
 
+          await FirebaseAuth.instance.signInWithCredential(credential);
+          await storeUserDataInFirestorephone(name, email, phoneNumber);
+          emit(SuccessVerisyState());
+        },
+        verificationFailed: (FirebaseAuthException e) {
 
-      PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
+          print('Verification failed: ${e.message}');
+          emit(ErrorVerifyState());
+        },
+        codeSent: (String verificationId, int? resendToken) async {
 
+          PhoneAuthCredential credential =
+          PhoneAuthProvider.credential(verificationId: verificationId, smsCode: otp);
+          await FirebaseAuth.instance.signInWithCredential(credential);
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
 
-      await FirebaseAuth.instance.signInWithCredential(credential).then((value){
+          print('Code auto-retrieval timeout: $verificationId');
+        },
+      );
+    } catch (e) {
+      print('Phone verification error: $e');
+      emit(ErrorVerifyState());
+    }
+  }
 
-        emit(SuccessVerisyState());
-      });
-
-    },
-    codeAutoRetrievalTimeout: (String verificationId) {},
-  );
-}
   Future<void> PhoneVerifyFirst({required String phoneNumber}) async {
     try {
       await FirebaseAuth.instance.verifyPhoneNumber(
@@ -198,13 +207,15 @@ Future<void>PhoneVerify({required String phoneNumber,required String otp})async{
     try {
 
       final CollectionReference users = FirebaseFirestore.instance.collection('users');
-
+      UserModel model=UserModel(
+          name: name,
+          email: email,
+          phone: phoneNumber,
+          uId:FirebaseAuth.instance.currentUser!.uid!
+      );
 
       await users.doc(FirebaseAuth.instance.currentUser!.uid!).set({
-        'name': name,
-        'email': email,
-        'phoneNumber': phoneNumber,
-        'uid': FirebaseAuth.instance.currentUser!.uid!,
+        model.toMap()
 
       });
       emit(SuccessRegisterState());

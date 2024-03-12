@@ -17,6 +17,7 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 
 import '../../../../../core/helper/component/component.dart';
+import '../../../../../generated/l10n.dart';
 import '../register/register_screen.dart';
 import 'cubit/login_cubit.dart';
 import 'cubit/login_states.dart';
@@ -90,12 +91,12 @@ class LoginScreen extends StatelessWidget {
             appBar: AppBar(
               elevation: 0,
               backgroundColor: Colors.transparent,
-              title: Text('Sign In',
+              title: Text( S.of(context).signIn,
               style: GoogleFonts.poppins(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
               ),
-              ),
+              ) ,
               centerTitle: true,
             ),
             body: SafeArea(
@@ -117,14 +118,14 @@ class LoginScreen extends StatelessWidget {
                           obscureText: false,
                           validator: (String? value) {
                             if (value!.isEmpty) {
-                              return 'Please enter your phone address';
+                              return S.of(context).pleasePhone;
                             }
                             return null;
                           },
                           keyboardAppearance: Brightness.dark,
                           decoration: InputDecoration(
 
-                            labelText: 'Phone',
+                            labelText: S.of(context).Phone,
                             labelStyle: GoogleFonts.eduNswActFoundation(
                               fontSize: 20,
                               color: Colors.grey,
@@ -152,16 +153,18 @@ class LoginScreen extends StatelessWidget {
 
                               controller: passwordController,
                               keyboardType: TextInputType.emailAddress,
+                              obscureText: cubit.isPassword,
 
                               validator: (String? value) {
                                 if (value!.isEmpty) {
-                                  return 'please enter your  password';
+                                  return S.of(context).pleasePassword;
                                 }
                                 return null;
                               },
                               keyboardAppearance: Brightness.dark,
                               decoration: InputDecoration(
-                                  labelText: 'password',
+
+                                  labelText: S.of(context).Password,
                                   labelStyle: GoogleFonts.eduNswActFoundation(
                                       fontSize: 20, color: Colors.grey),
                                   suffixIcon: IconButton(
@@ -201,18 +204,18 @@ class LoginScreen extends StatelessWidget {
                                 child: MaterialButton(
                                 
                                   onPressed: () async{
-                                    await signInWithFacebook();
-                                    // if (formKey.currentState!.validate()) {
-                                    //
-                                    //
-                                    // }
+
+                                    if (formKey.currentState!.validate()) {
+
+
+                                    }
 
                                     if(state is SuccessLoginState){
                                       print('donnnnnnnnnnnnne');
                                     }
                                   },
                                   child: Text(
-                                    'Sign In',
+                                    S.of(context).signIn,
                                     style: GoogleFonts.poppins(
                                       fontSize: 16,
                                       color: Colors.white,
@@ -240,7 +243,7 @@ class LoginScreen extends StatelessWidget {
                                     color: Colors.grey,
                                   ),
                                 ),
-                                Text('OR Sign in with',
+                                Text(S.of(context).Or,
                                   style: TextStyle(
                                       fontSize: 16
 
@@ -301,11 +304,14 @@ class LoginScreen extends StatelessWidget {
 
                               ],
                             ),
+                            const SizedBox(
+                              height: 20,
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                    "Don’t have an account? ",
+                                    S.of(context).donthave,
                                     style: GoogleFonts.poppins(
                                       fontSize: 14,
 
@@ -318,11 +324,11 @@ class LoginScreen extends StatelessWidget {
                                     }));
                                   },
                                   child: Text(
-                                      "Sign up ",
-                                      style: GoogleFonts.poppins(
+                                      S.of(context).CreateAccount,
+                                      style: GoogleFonts.tajawal(
                                         fontSize: 14,
                                         color: Colors.black,
-                                        fontWeight: FontWeight.w700
+                                        fontWeight: FontWeight.bold
 
                                       )
                                   ),

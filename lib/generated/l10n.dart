@@ -99,6 +99,186 @@ class S {
       args: [],
     );
   }
+
+  /// `CreateAccount`
+  String get CreateAccount {
+    return Intl.message(
+      'CreateAccount',
+      name: 'CreateAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get Name {
+    return Intl.message(
+      'Name',
+      name: 'Name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone`
+  String get Phone {
+    return Intl.message(
+      'Phone',
+      name: 'Phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get Email {
+    return Intl.message(
+      'Email',
+      name: 'Email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get Password {
+    return Intl.message(
+      'Password',
+      name: 'Password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Up`
+  String get sign {
+    return Intl.message(
+      'Sign Up',
+      name: 'sign',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in`
+  String get signIn {
+    return Intl.message(
+      'Sign in',
+      name: 'signIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forget Password`
+  String get forgetPassword {
+    return Intl.message(
+      'Forget Password',
+      name: 'forgetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OR`
+  String get Or {
+    return Intl.message(
+      'OR',
+      name: 'Or',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `please enter your email address`
+  String get pleaseEmail {
+    return Intl.message(
+      'please enter your email address',
+      name: 'pleaseEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `please enter your phone`
+  String get pleasePhone {
+    return Intl.message(
+      'please enter your phone',
+      name: 'pleasePhone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `please enter your name`
+  String get pleaseName {
+    return Intl.message(
+      'please enter your name',
+      name: 'pleaseName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `please enter your password`
+  String get pleasePassword {
+    return Intl.message(
+      'please enter your password',
+      name: 'pleasePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in With Google`
+  String get signWithgoogle {
+    return Intl.message(
+      'Sign in With Google',
+      name: 'signWithgoogle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in With Facebook`
+  String get signWithFace {
+    return Intl.message(
+      'Sign in With Facebook',
+      name: 'signWithFace',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don\'t have an account?`
+  String get donthave {
+    return Intl.message(
+      'Don\\\'t have an account?',
+      name: 'donthave',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already have an account`
+  String get alreadyHaveAccount {
+    return Intl.message(
+      'Already have an account',
+      name: 'alreadyHaveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Complete Sign Up`
+  String get completeSignUp {
+    return Intl.message(
+      'Complete Sign Up',
+      name: 'completeSignUp',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
