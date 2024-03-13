@@ -51,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "signWithFace": MessageLookupByLibrary.simpleMessage(
             "تسجيل الدخول بأستخدام فيس بوك "),
         "signWithgoogle":
-            MessageLookupByLibrary.simpleMessage("تسجيل الدخول بأستخدام جوجل ")
+            MessageLookupByLibrary.simpleMessage("تسجيل الدخول بأستخدام جوجل "),
+        "verfyEmail": MessageLookupByLibrary.simpleMessage("تفعيل التليفون")
       };
 }

@@ -1,3 +1,6 @@
+import 'dart:core';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,21 +12,73 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../../../../core/helper/component/component.dart';
+import '../../../../../generated/l10n.dart';
 import 'cubit/register_cubit.dart';
 
 
 
-class OtpScreen extends StatelessWidget {
+class OtpScreen extends StatefulWidget {
   OtpScreen({required this.phoneNumber,required this.email,required this.name});
-
-  final TextEditingController pinController = TextEditingController();
 
   String phoneNumber;
   String name;
   String email;
 
   @override
+  State<OtpScreen> createState() => _OtpScreenState();
+}
+
+class _OtpScreenState extends State<OtpScreen> {
+  final TextEditingController pinController = TextEditingController();
+  String ?verifid;
+  @override
+  void phoneVerfiy()async{
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: widget.phoneNumber,
+      verificationCompleted: (PhoneAuthCredential credential) {},
+      verificationFailed: (FirebaseAuthException e) {},
+      codeSent: (String verificationId, int? resendToken) {
+        verifid=verificationId;
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {},
+    );
+  }
+  void sendOtp()async{
+
+    try {
+      FirebaseAuth auth = FirebaseAuth.instance;
+
+
+          String smsCode = pinController.text;
+
+          // Create a PhoneAuthCredential with the code
+          PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verifid!, smsCode: smsCode);
+
+
+          await auth.signInWithCredential(credential);
+          RegisterCubit.get(context).storeUserDataInFirestorephone(widget.name, widget.email, widget.phoneNumber);
+
+
+    } on Exception catch (e) {
+      showTopSnackBar(
+          Overlay.of(context),
+          CustomSnackBar.error(
+          message: e.toString(),
+      ));
+    }
+
+
+  }
+
+  void initState() {
+    phoneVerfiy();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+
+
     return BlocProvider(
       create: (context) => RegisterCubit(),
       child: BlocConsumer<RegisterCubit, RegisterState>(
@@ -52,8 +107,8 @@ class OtpScreen extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text(
-              'verfiy Phone',
-                style: GoogleFonts.poppins(
+             S.of(context).verfyEmail,
+                style: GoogleFonts.tajawal(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
                 ),
@@ -155,12 +210,12 @@ class OtpScreen extends StatelessWidget {
                       onPressed: () {
                         String otp = pinController.text;
                         print('Entered OTP: $otp');
-                        cubit.PhoneVerify(phoneNumber: phoneNumber, otp: otp,email: email,name: name);
+                        sendOtp();
 
                       },
                       child: Text(
-                        'verify Phone',
-                        style: GoogleFonts.poppins(fontSize: 16, color: Colors.white),
+                        S.of(context).verfyEmail,
+                        style: GoogleFonts.tajawal(fontSize: 16, color: Colors.white),
                       ),
                     ),
                   ),

@@ -279,6 +279,16 @@ class S {
       args: [],
     );
   }
+
+  /// ` Verify Phone`
+  String get verfyEmail {
+    return Intl.message(
+      ' Verify Phone',
+      name: 'verfyEmail',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

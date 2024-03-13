@@ -54,6 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "signWithFace":
             MessageLookupByLibrary.simpleMessage("Sign in With Facebook"),
         "signWithgoogle":
-            MessageLookupByLibrary.simpleMessage("Sign in With Google")
+            MessageLookupByLibrary.simpleMessage("Sign in With Google"),
+        "verfyEmail": MessageLookupByLibrary.simpleMessage(" Verify Phone")
       };
 }

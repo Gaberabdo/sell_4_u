@@ -263,7 +263,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                                   onPressed: () {
                                     if (globalFormKey.currentState!.validate()) {
-                                     cubit.PhoneVerifyFirst(phoneNumber:'+20${phoneController.text}');
+
                                      navigatorTo(context, OtpScreen(phoneNumber: '+20${phoneController.text}',email: emailController.text,name: nameController.text,));
                                     }
                                   },
