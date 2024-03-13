@@ -1,25 +1,24 @@
-
+import 'package:flutter/material.dart.';
 
 class UserModel {
   String? name;
   String? email;
-
+  String? phone;
   String? uId;
 
-  String? role;
+  String? image;
 
 
-  UserModel({this.name, this.email, this.role, this.uId,
-     });
+  UserModel({this.name, this.email, this.phone, this.uId,
+    this.image, });
 
   UserModel.fromJson(Map<String, dynamic>? json) {
     email = json!['email'] ?? '';
     name = json!['name']?? '';
-
+    phone = json!['phone']?? '';
     uId = json!['uId']?? '';
 
-
-    role = json!['role']?? '';
+    image = json!['image']?? '';
 
   }
 
@@ -27,11 +26,11 @@ class UserModel {
     return {
       'name': name,
       'email': email,
+      'phone': phone,
 
-      'role':role,
+      'image': image,
 
-
-      'uId': uId,
+     'uId':uId
     };
   }
 }

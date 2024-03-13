@@ -1,11 +1,29 @@
 {
-  "homeWelcome": "مرحبا بك",
   "search": "البحث اي شئ",
   "categories": "فئات",
   "seeAll": "اظهار الكل",
   "nearYou": "بالقرب منك",
   "continueB": "اكمل تصفح",
   "mostP": "الأكثر شعبية",
-  "description" : "الوصف"
-
+  "description": "الوصف",
+  "CreateAccount": "انشاء حساب",
+  "Name": "الاسم",
+  "Phone": "تليفون",
+  "Email": "ايميل",
+  "Password": "باسورد",
+  "sign": "تسجيل  ",
+  "signIn": "تسجيل الدخول",
+  "Or": "او",
+  "pleaseEmail": "من فضلك ادخل ايميلك",
+  "pleasePhone": "من فضلك ادخل تليفونك",
+  "pleaseName": "من فضلك ادخل اسمك",
+  "pleasePassword": "من فضلك ادخل الباسورد",
+  "forgetPassword": "نسيت كلمة المرور",
+  "signWithgoogle": "تسجيل الدخول بأستخدام جوجل ",
+  "signWithFace": "تسجيل الدخول بأستخدام فيس بوك ",
+  "donthave": "ليس لديك حساب??",
+  "alreadyHaveAccount": "لديك حساب بالفعل",
+  "completeSignUp": "اكمال التسجيل",
+  "verfyEmail": "تفعيل الايميل",
+  "homeWelcome": "مرحبا بك"
 }

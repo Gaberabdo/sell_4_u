@@ -1,11 +1,26 @@
 {
-  "homeWelcome" : "Welcome",
   "search" : "Search for anything",
   "categories" : "Categories",
   "seeAll" : "See All",
   "nearYou" : "Near you",
-  "continueB" : "Continue Browsing",
-  "mostP" : "Most Popular",
-  "description" : "Description"
+  "CreateAccount": "CreateAccount",
+  "Name": "Name",
+  "Phone": "Phone",
+  "Email": "Email",
+  "Password": "Password",
+  "sign": "Sign Up",
+  "signIn": "Sign in",
+  "forgetPassword": "Forget Password",
+  "Or": "OR",
+  "pleaseEmail": "please enter your email address",
+  "pleasePhone": "please enter your phone",
+  "pleaseName": "please enter your name",
+  "pleasePassword": "please enter your password",
 
+  "signWithgoogle": "Sign in With Google",
+  "signWithFace": "Sign in With Facebook",
+  "donthave": "Don\\'t have an account?",
+  "alreadyHaveAccount": "Already have an account",
+  "completeSignUp": "Complete Sign Up",
+  "homeWelcome" : "Welcome"
 }
