@@ -21,12 +21,13 @@ class HomeFeedsDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => FeedsCubit(),
+      create: (context) => FeedsCubit()..getUserData(id: model.uId),
       child: BlocConsumer<FeedsCubit, FeedsState>(
         listener: (context, state) {
           // TODO: implement listener
         },
         builder: (context, state) {
+          var cubit = FeedsCubit.get(context);
           return Scaffold(
             appBar: AppBar(
               elevation: 0,
@@ -115,7 +116,7 @@ class HomeFeedsDetails extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   Card(
@@ -128,11 +129,11 @@ class HomeFeedsDetails extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.visibility_outlined,
                                 size: 18,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 8,
                               ),
                               Text(
@@ -142,7 +143,7 @@ class HomeFeedsDetails extends StatelessWidget {
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 8,
                               ),
                               Text(
@@ -152,7 +153,7 @@ class HomeFeedsDetails extends StatelessWidget {
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 8,
                               ),
                               Container(
@@ -160,24 +161,24 @@ class HomeFeedsDetails extends StatelessWidget {
                                 width: 1,
                                 color: ColorStyle.gray,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 8,
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.timelapse_outlined,
                                 size: 18,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 8,
                               ),
                               Text(
-                                transform(model.time!),
+                                transform(model.time),
                                 style: FontStyleThame.textStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 8,
                               ),
                               Container(
@@ -185,7 +186,7 @@ class HomeFeedsDetails extends StatelessWidget {
                                 width: 1,
                                 color: ColorStyle.gray,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 8,
                               ),
                               Text(
@@ -198,7 +199,7 @@ class HomeFeedsDetails extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 12,
                           ),
                           Text(
@@ -209,7 +210,7 @@ class HomeFeedsDetails extends StatelessWidget {
                               fontColor: ColorStyle.primaryColor,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 12,
                           ),
                           Text(
@@ -220,18 +221,18 @@ class HomeFeedsDetails extends StatelessWidget {
                               fontColor: ColorStyle.primaryColor,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 12,
                           ),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Icon(
+                              const Icon(
                                 IconlyLight.location,
                                 size: 18,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 8,
                               ),
                               Text(
@@ -247,7 +248,7 @@ class HomeFeedsDetails extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   Card(
@@ -278,6 +279,186 @@ class HomeFeedsDetails extends StatelessWidget {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    borderRadius: BorderRadius.circular(8),
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CircleAvatar(
+                              radius: 30,
+                              backgroundImage: NetworkImage(cubit.userModel ==
+                                      null
+                                  ? "https://img.freepik.com/free-vector/illustration-user-avatar-icon_53876-5907.jpg?w=740&t=st=1710334520~exp=1710335120~hmac=f053daa6a74128973e2f7512cd8b6eaae51a0716ece0866a6b355e1c900a61e6"
+                                  : cubit.userModel!.image!),
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  cubit.userModel == null
+                                      ? "user"
+                                      : cubit.userModel!.name!,
+                                  style: FontStyleThame.textStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                    fontColor: Colors.black,
+                                  ),
+                                ),
+                                Text(
+                                  cubit.userModel == null
+                                      ? "9988545"
+                                      : cubit.userModel!.phone!,
+                                  style: FontStyleThame.textStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    fontColor: Colors.black38,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Spacer(),
+                            const Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              size: 16,
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    borderRadius: BorderRadius.circular(8),
+                    child: Container(
+                      height: 170,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: const Color.fromRGBO(242, 242, 242, 1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            bottomNavigationBar: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 3,
+
+                    child: SizedBox(
+                      height: 44,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorStyle.primaryColor,
+                          foregroundColor: Colors.white,
+                          elevation: 3,
+                          shape: (RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          )),
+                        ),
+                        onPressed: () {
+                          cubit.makePhoneCall(phone: cubit.userModel!.phone!);
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              IconlyLight.call,
+                            ),
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            Text(
+                              S.of(context).callMe,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: SizedBox(
+                      height: 44,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromRGBO(37, 211, 102, 1),
+                          foregroundColor: Colors.white,
+                          elevation: 3,
+                          shape: (RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          )),
+                        ),
+                        onPressed: () {
+                          cubit.openWhatsApp(phone: cubit.userModel!.phone!);
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Image(
+                              height: 25,
+                              width: 25,
+                              fit: BoxFit.contain,
+                              color: Colors.white,
+                              image: NetworkImage(
+                                  'https://firebasestorage.googleapis.com/v0/b/sales-b43bd.appspot.com/o/image-removebg-preview%20(1).png?alt=media&token=750dc901-f549-4782-b22d-3d21b97a8666'),
+                            ),
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            Text(
+                              S.of(context).whatsapp,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: SizedBox(
+                      height: 44,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue.shade900,
+                          foregroundColor: Colors.white,
+                          elevation: 3,
+                          shape: (RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          )),
+                        ),
+                        onPressed: () {
+                        },
+                        child: Icon(IconlyLight.chat),
                       ),
                     ),
                   ),

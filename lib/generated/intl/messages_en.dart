@@ -22,13 +22,43 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "CreateAccount": MessageLookupByLibrary.simpleMessage("CreateAccount"),
+        "Email": MessageLookupByLibrary.simpleMessage("Email"),
+        "Name": MessageLookupByLibrary.simpleMessage("Name"),
+        "Or": MessageLookupByLibrary.simpleMessage("OR"),
+        "Password": MessageLookupByLibrary.simpleMessage("Password"),
+        "Phone": MessageLookupByLibrary.simpleMessage("Phone"),
+        "alreadyHaveAccount":
+            MessageLookupByLibrary.simpleMessage("Already have an account"),
+        "callMe": MessageLookupByLibrary.simpleMessage("Call now"),
         "categories": MessageLookupByLibrary.simpleMessage("Categories"),
+        "completeSignUp":
+            MessageLookupByLibrary.simpleMessage("Complete Sign Up"),
         "continueB": MessageLookupByLibrary.simpleMessage("Continue Browsing"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "donthave":
+            MessageLookupByLibrary.simpleMessage("Don\\\'t have an account?"),
+        "forgetPassword":
+            MessageLookupByLibrary.simpleMessage("Forget Password"),
         "homeWelcome": MessageLookupByLibrary.simpleMessage("Welcome"),
         "mostP": MessageLookupByLibrary.simpleMessage("Most Popular"),
         "nearYou": MessageLookupByLibrary.simpleMessage("Near you"),
+        "pleaseEmail": MessageLookupByLibrary.simpleMessage(
+            "please enter your email address"),
+        "pleaseName":
+            MessageLookupByLibrary.simpleMessage("please enter your name"),
+        "pleasePassword":
+            MessageLookupByLibrary.simpleMessage("please enter your password"),
+        "pleasePhone":
+            MessageLookupByLibrary.simpleMessage("please enter your phone"),
         "search": MessageLookupByLibrary.simpleMessage("Search for anything"),
-        "seeAll": MessageLookupByLibrary.simpleMessage("See All")
+        "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
+        "sign": MessageLookupByLibrary.simpleMessage("Sign Up"),
+        "signIn": MessageLookupByLibrary.simpleMessage("Sign in"),
+        "signWithFace":
+            MessageLookupByLibrary.simpleMessage("Sign in With Facebook"),
+        "signWithgoogle":
+            MessageLookupByLibrary.simpleMessage("Sign in With Google"),
+        "whatsapp": MessageLookupByLibrary.simpleMessage("What\'s app")
       };
 }

@@ -74,7 +74,6 @@ class _TextFormWidgetState extends State<TextFormWidget> {
         borderRadius: BorderRadius.circular(8),
       ),
       child: TextFormField(
-
         cursorColor: Colors.blue,
         enabled: widget.enabled,
         controller: widget.emailController,

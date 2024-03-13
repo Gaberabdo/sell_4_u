@@ -8,6 +8,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sell_4_u/Features/Auth-feature/presentation/pages/register/phone%20screen.dart';
+import 'package:sell_4_u/Features/Home-feature/view/layout.dart';
 import 'package:sell_4_u/Features/Home-feature/view/screens/home/feeds_screen.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -66,21 +67,21 @@ class LoginScreen extends StatelessWidget {
           if(state is SuccessLoginState){
             showTopSnackBar(
               Overlay.of(context),
-              CustomSnackBar.success(
+              const CustomSnackBar.success(
                 message:'Login success',
               ),
             );
-            navigatorTo(context, HomeFeeds());
+            navigatorTo(context, const LayoutScreen());
 
           }
           if(state is ErrorLoginState){
             showTopSnackBar(
               Overlay.of(context),
-              CustomSnackBar.error(
+              const CustomSnackBar.error(
                 message:'Login Error',
               ),
             );
-            navigatorTo(context, HomeFeeds());
+            navigatorTo(context, const LayoutScreen());
 
           }
         },
@@ -236,7 +237,7 @@ class LoginScreen extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   child: Divider(
                                     height: 1,
 
@@ -244,12 +245,12 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(S.of(context).Or,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 16
 
                                   ),
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Divider(
                                     height: 1,
 
@@ -275,12 +276,12 @@ class LoginScreen extends StatelessWidget {
                                   child: Container(
                                     height: 55,
                                     width: 55,
-                                    padding: EdgeInsets.all(8),
+                                    padding: const EdgeInsets.all(8),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(12),
                                         color: Colors.grey.shade300
                                     ),
-                                    child: Center(child: FaIcon(FontAwesomeIcons.facebook,size: 35,)),
+                                    child: const Center(child: FaIcon(FontAwesomeIcons.facebook,size: 35,)),
                                   ),
                                 ),
                                 const SizedBox(
@@ -293,12 +294,12 @@ class LoginScreen extends StatelessWidget {
                                   child: Container(
                                     height: 55,
                                     width: 55,
-                                    padding: EdgeInsets.all(8),
+                                    padding: const EdgeInsets.all(8),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(12),
                                         color: Colors.grey.shade300
                                     ),
-                                    child: Center(child: FaIcon(FontAwesomeIcons.google,size: 30,)),
+                                    child: const Center(child: FaIcon(FontAwesomeIcons.google,size: 30,)),
                                   ),
                                 ),
 

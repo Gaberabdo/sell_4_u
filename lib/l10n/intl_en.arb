@@ -1,9 +1,11 @@
 {
-  "search" : "Search for anything",
-  "categories" : "Categories",
-  "seeAll" : "See All",
-  "nearYou" : "Near you",
+  "search": "Search for anything",
+  "categories": "Categories",
+  "seeAll": "See All",
+  "nearYou": "Near you",
   "CreateAccount": "CreateAccount",
+  "continueB" : "Continue Browsing",
+  "mostP" : "Most Popular",
   "Name": "Name",
   "Phone": "Phone",
   "Email": "Email",
@@ -16,11 +18,13 @@
   "pleasePhone": "please enter your phone",
   "pleaseName": "please enter your name",
   "pleasePassword": "please enter your password",
-
   "signWithgoogle": "Sign in With Google",
   "signWithFace": "Sign in With Facebook",
   "donthave": "Don\\'t have an account?",
   "alreadyHaveAccount": "Already have an account",
   "completeSignUp": "Complete Sign Up",
-  "homeWelcome" : "Welcome"
+  "homeWelcome": "Welcome",
+  "description": "Description",
+  "callMe": "Call now",
+  "whatsapp": "What's app"
 }

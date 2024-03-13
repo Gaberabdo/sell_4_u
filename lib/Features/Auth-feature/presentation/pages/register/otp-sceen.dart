@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sell_4_u/Features/Auth-feature/presentation/pages/register/cubit/register_states.dart';
+import 'package:sell_4_u/Features/Home-feature/view/layout.dart';
 import 'package:sell_4_u/Features/Home-feature/view/screens/home/feeds_screen.dart';
 
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
@@ -32,16 +33,16 @@ class OtpScreen extends StatelessWidget {
             print('succcccces');
             showTopSnackBar(
               Overlay.of(context),
-              CustomSnackBar.success(
+              const CustomSnackBar.success(
                 message: 'verify success',
               ),
             );
-            navigatorTo(context, HomeFeeds());
+            navigatorTo(context, const LayoutScreen());
           }
           if (state is ErrorRegisterState) {
             showTopSnackBar(
               Overlay.of(context),
-              CustomSnackBar.error(
+              const CustomSnackBar.error(
                 message: 'Enter correct Otp',
               ),
             );
@@ -76,7 +77,7 @@ class OtpScreen extends StatelessWidget {
                       defaultPinTheme: PinTheme(
                         width: 56,
                         height: 56,
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontSize: 22,
                           color: Color.fromRGBO(30, 60, 87, 1),
                         ),
@@ -85,7 +86,7 @@ class OtpScreen extends StatelessWidget {
                           border: Border.all(color: Colors.grey),
                         ),
                       ),
-                      separatorBuilder: (index) => SizedBox(width: 8),
+                      separatorBuilder: (index) => const SizedBox(width: 8),
 
                       hapticFeedbackType: HapticFeedbackType.lightImpact,
                       onCompleted: (pin) {
@@ -108,7 +109,7 @@ class OtpScreen extends StatelessWidget {
                       focusedPinTheme: PinTheme(
                         width: 56,
                         height: 56,
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontSize: 22,
                           color: Color.fromRGBO(30, 60, 87, 1),
                         ),
@@ -120,7 +121,7 @@ class OtpScreen extends StatelessWidget {
                       submittedPinTheme: PinTheme(
                         width: 56,
                         height: 56,
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontSize: 22,
                           color: Color.fromRGBO(30, 60, 87, 1),
                         ),
@@ -132,7 +133,7 @@ class OtpScreen extends StatelessWidget {
                       errorPinTheme: PinTheme(
                         width: 56,
                         height: 56,
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontSize: 22,
                           color: Colors.redAccent,
                         ),
@@ -143,7 +144,7 @@ class OtpScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
                     height: 45,
                     width: 340,
