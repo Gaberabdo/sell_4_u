@@ -3,6 +3,9 @@
   "search" : "Search for anything",
   "categories" : "Categories",
   "seeAll" : "See All",
-  "nearYou" : "Near you"
+  "nearYou" : "Near you",
+  "continueB" : "Continue Browsing",
+  "mostP" : "Most Popular",
+  "description" : "Description"
 
 }

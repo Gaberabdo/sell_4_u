@@ -1,8 +1,11 @@
 {
-  "homeWelcome" : "مرحبا بك",
-  "search" : "البحث اي شئ",
-  "categories" : "فئات",
-  "seeAll" : "اظهار الكل",
-  "nearYou" : "بالقرب منك"
+  "homeWelcome": "مرحبا بك",
+  "search": "البحث اي شئ",
+  "categories": "فئات",
+  "seeAll": "اظهار الكل",
+  "nearYou": "بالقرب منك",
+  "continueB": "اكمل تصفح",
+  "mostP": "الأكثر شعبية",
+  "description" : "الوصف"
 
 }

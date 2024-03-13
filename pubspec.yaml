@@ -45,6 +45,7 @@ dependencies:
   conditional_builder_null_safety: ^0.0.6
   google_fonts: ^5.1.0
   iconly: ^1.0.1
+  carousel_slider: ^4.2.1
 
   #fire_base
   firebase_storage:

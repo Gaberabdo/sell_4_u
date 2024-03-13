@@ -31,31 +31,32 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          elevation: 3,
-          backgroundColor: Colors.white,
-          selectedItemColor: ColorStyle.primaryColor,
-          selectedLabelStyle: FontStyleThame.textStyle(
-            fontSize: 10,
-            fontWeight: FontWeight.w400
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            elevation: 3,
+            backgroundColor: Colors.white,
+            selectedItemColor: ColorStyle.primaryColor,
+            selectedLabelStyle: FontStyleThame.textStyle(
+                fontSize: 10, fontWeight: FontWeight.w400),
+            unselectedLabelStyle: FontStyleThame.textStyle(
+                fontSize: 10, fontWeight: FontWeight.w400),
+            unselectedItemColor: ColorStyle.gray,
+            selectedIconTheme: IconThemeData(
+              size: 16,
+            ),
+            unselectedIconTheme: IconThemeData(
+              size: 16,
+            ),
           ),
-          unselectedLabelStyle: FontStyleThame.textStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.w400
-          ),
-          unselectedItemColor: ColorStyle.gray,
-          selectedIconTheme: IconThemeData(
-            size: 16,
-          ),
-          unselectedIconTheme: IconThemeData(
-            size: 16,
-          ),
-
+          scaffoldBackgroundColor: Colors.white,
+          appBarTheme: AppBarTheme(
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black,
+          )
         ),
-      ),
-      home: const LayoutScreen(),
+        home: const LayoutScreen(),
         locale: const Locale('en'),
         localizationsDelegates: const [
           S.delegate,
@@ -63,7 +64,6 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: S.delegate.supportedLocales
-    );
+        supportedLocales: S.delegate.supportedLocales);
   }
 }

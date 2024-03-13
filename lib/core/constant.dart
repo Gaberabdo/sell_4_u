@@ -29,10 +29,77 @@ class FontStyleThame {
     Color? fontColor,
     FontWeight fontWeight = FontWeight.w600,
   }) {
-    return GoogleFonts.poppins(
+    return GoogleFonts.tajawal(
       color: fontColor,
       fontWeight: fontWeight,
       fontSize: fontSize,
     );
+  }
+}
+
+String transform(String value) {
+  List<String> parts = value.split(" ");
+  String dayOfWeek = parts[0]; // e.g., Tue
+  String month = parts[1]; // e.g., Feb
+  int day = int.parse(parts[2]); // e.g., 20
+  int year = int.parse(parts[3]); // e.g., 2024
+  String time = parts[4]; // e.g., 19:05:58
+  String timeZone = parts[6]; // e.g., (Eastern European Standard Time)
+
+  List<String> timeParts = time.split(":");
+  int hours = int.parse(timeParts[0]);
+  int minutes = int.parse(timeParts[1]);
+  int seconds = int.parse(timeParts[2]);
+
+  DateTime date =
+  DateTime(year, _getMonth(month), day, hours, minutes, seconds);
+
+  DateTime now = DateTime.now();
+  int diffInSeconds =
+  ((now.millisecondsSinceEpoch - date.millisecondsSinceEpoch) / 1000)
+      .floor();
+
+  if (diffInSeconds < 60) {
+    return 'Just now';
+  } else if (diffInSeconds < 3600) {
+    int minutes = (diffInSeconds / 60).floor();
+    return '$minutes ${minutes == 1 ? 'minute' : 'minutes'} ago';
+  } else if (diffInSeconds < 86400) {
+    int hours = (diffInSeconds / 3600).floor();
+    return '$hours ${hours == 1 ? 'hour' : 'hours'} ago';
+  } else {
+    int days = (diffInSeconds / 86400).floor();
+    return '$days ${days == 1 ? 'day' : 'days'} ago';
+  }
+}
+
+int _getMonth(String month) {
+  switch (month) {
+    case "Jan":
+      return DateTime.january;
+    case "Feb":
+      return DateTime.february;
+    case "Mar":
+      return DateTime.march;
+    case "Apr":
+      return DateTime.april;
+    case "May":
+      return DateTime.may;
+    case "Jun":
+      return DateTime.june;
+    case "Jul":
+      return DateTime.july;
+    case "Aug":
+      return DateTime.august;
+    case "Sep":
+      return DateTime.september;
+    case "Oct":
+      return DateTime.october;
+    case "Nov":
+      return DateTime.november;
+    case "Dec":
+      return DateTime.december;
+    default:
+      throw Exception("Invalid month");
   }
 }

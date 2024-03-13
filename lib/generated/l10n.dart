@@ -99,6 +99,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Continue Browsing`
+  String get continueB {
+    return Intl.message(
+      'Continue Browsing',
+      name: 'continueB',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Most Popular`
+  String get mostP {
+    return Intl.message(
+      'Most Popular',
+      name: 'mostP',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
