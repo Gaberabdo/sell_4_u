@@ -44,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("من فضلك ادخل الباسورد"),
         "pleasePhone":
             MessageLookupByLibrary.simpleMessage("من فضلك ادخل تليفونك"),
+        "resendOtp": MessageLookupByLibrary.simpleMessage("اعادة الارسال"),
         "search": MessageLookupByLibrary.simpleMessage("البحث اي شئ"),
         "seeAll": MessageLookupByLibrary.simpleMessage("اظهار الكل"),
         "sign": MessageLookupByLibrary.simpleMessage("تسجيل  "),

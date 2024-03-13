@@ -24,5 +24,6 @@
   "alreadyHaveAccount": "Already have an account",
   "completeSignUp": "Complete Sign Up",
   "verfyEmail" : " Verify Phone",
+  "resendOtp" : " Resend Otp",
   "homeWelcome" : "Welcome"
 }

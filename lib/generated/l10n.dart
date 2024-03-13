@@ -289,6 +289,16 @@ class S {
       args: [],
     );
   }
+
+  /// ` Resend Otp`
+  String get resendOtp {
+    return Intl.message(
+      ' Resend Otp',
+      name: 'resendOtp',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

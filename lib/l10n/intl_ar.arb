@@ -24,5 +24,6 @@
   "alreadyHaveAccount": "لديك حساب بالفعل",
   "completeSignUp": "اكمال التسجيل",
   "verfyEmail" : "تفعيل التليفون",
+  "resendOtp" : "اعادة الارسال",
   "homeWelcome" : "مرحبا بك"
 }

@@ -18,7 +18,7 @@ import 'cubit/register_cubit.dart';
 
 
 class OtpScreen extends StatefulWidget {
-  OtpScreen({required this.phoneNumber,required this.email,required this.name});
+  OtpScreen({required this.phoneNumber, required this.email, required this.name});
 
   String phoneNumber;
   String name;
@@ -30,65 +30,72 @@ class OtpScreen extends StatefulWidget {
 
 class _OtpScreenState extends State<OtpScreen> {
   final TextEditingController pinController = TextEditingController();
-  String ?verifid;
-  @override
-  void phoneVerfiy()async{
+  String? verificationId;
+
+  void phoneVerify() async {
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: widget.phoneNumber,
       verificationCompleted: (PhoneAuthCredential credential) {},
-      verificationFailed: (FirebaseAuthException e) {},
+      verificationFailed: (FirebaseAuthException e) {
+        showTopSnackBar(
+          Overlay.of(context),
+          CustomSnackBar.error(
+            message: e.message ?? 'Verification failed',
+          ),
+        );
+      },
       codeSent: (String verificationId, int? resendToken) {
-        verifid=verificationId;
+        setState(() {
+          this.verificationId = verificationId;
+        });
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
   }
-  void sendOtp()async{
 
+  void sendOtp() async {
     try {
-      FirebaseAuth auth = FirebaseAuth.instance;
-
-
-          String smsCode = pinController.text;
-
-          // Create a PhoneAuthCredential with the code
-          PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verifid!, smsCode: smsCode);
-
-
-          await auth.signInWithCredential(credential);
-          RegisterCubit.get(context).storeUserDataInFirestorephone(widget.name, widget.email, widget.phoneNumber);
-
-
-    } on Exception catch (e) {
+      String smsCode = pinController.text;
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId!, smsCode: smsCode);
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      RegisterCubit.get(context).storeUserDataInFirestorephone(widget.name, widget.email, widget.phoneNumber);
+    } catch (e) {
       showTopSnackBar(
-          Overlay.of(context),
-          CustomSnackBar.error(
+        Overlay.of(context),
+        CustomSnackBar.error(
           message: e.toString(),
-      ));
+        ),
+      );
     }
-
-
   }
 
+  void resendOtp() async {
+    phoneVerify();
+    showTopSnackBar(
+      Overlay.of(context),
+      CustomSnackBar.success(
+        message: 'OTP resent successfully',
+      ),
+    );
+  }
+
+  @override
   void initState() {
-    phoneVerfiy();
+    phoneVerify();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
-
     return BlocProvider(
       create: (context) => RegisterCubit(),
       child: BlocConsumer<RegisterCubit, RegisterState>(
         listener: (context, state) {
           if (state is SuccessRegisterState) {
-            print('succcccces');
             showTopSnackBar(
               Overlay.of(context),
               CustomSnackBar.success(
-                message: 'verify success',
+                message: 'Verification success',
               ),
             );
             navigatorTo(context, HomeFeeds());
@@ -97,7 +104,7 @@ class _OtpScreenState extends State<OtpScreen> {
             showTopSnackBar(
               Overlay.of(context),
               CustomSnackBar.error(
-                message: 'Enter correct Otp',
+                message: 'Enter correct OTP',
               ),
             );
           }
@@ -107,7 +114,7 @@ class _OtpScreenState extends State<OtpScreen> {
           return Scaffold(
             appBar: AppBar(
               title: Text(
-             S.of(context).verfyEmail,
+                S.of(context).verfyEmail,
                 style: GoogleFonts.tajawal(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
@@ -141,7 +148,6 @@ class _OtpScreenState extends State<OtpScreen> {
                         ),
                       ),
                       separatorBuilder: (index) => SizedBox(width: 8),
-
                       hapticFeedbackType: HapticFeedbackType.lightImpact,
                       onCompleted: (pin) {
                         debugPrint('onCompleted: $pin');
@@ -199,11 +205,26 @@ class _OtpScreenState extends State<OtpScreen> {
                     ),
                   ),
                   SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          resendOtp();
+                        },
+                        child: Text(
+                          S.of(context).resendOtp,
+                          style: GoogleFonts.tajawal(color: Colors.green,fontSize: 16,fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 30),
                   Container(
                     height: 45,
                     width: 340,
                     decoration: BoxDecoration(
-                      color: Colors.black,
+                      color: Colors.blue.shade200,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: MaterialButton(
@@ -211,7 +232,6 @@ class _OtpScreenState extends State<OtpScreen> {
                         String otp = pinController.text;
                         print('Entered OTP: $otp');
                         sendOtp();
-
                       },
                       child: Text(
                         S.of(context).verfyEmail,
@@ -219,6 +239,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       ),
                     ),
                   ),
+
                 ],
               ),
             ),
@@ -228,3 +249,4 @@ class _OtpScreenState extends State<OtpScreen> {
     );
   }
 }
+

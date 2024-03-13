@@ -80,7 +80,7 @@ class LoginScreen extends StatelessWidget {
                 message:'Login Error',
               ),
             );
-            navigatorTo(context, HomeFeeds());
+
 
           }
         },

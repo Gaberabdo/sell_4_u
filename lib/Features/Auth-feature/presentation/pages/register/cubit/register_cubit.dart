@@ -141,67 +141,6 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   ///sign up using phone
-  Future<void> PhoneVerify({
-    required String phoneNumber,
-    required String otp,
-    required String name,
-    required String email,
-  }) async {
-    try {
-      await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
-        verificationCompleted: (PhoneAuthCredential credential) async {
-
-          await FirebaseAuth.instance.signInWithCredential(credential);
-          await storeUserDataInFirestorephone(name, email, phoneNumber);
-          emit(SuccessVerisyState());
-        },
-        verificationFailed: (FirebaseAuthException e) {
-
-          print('Verification failed: ${e.message}');
-          emit(ErrorVerifyState());
-        },
-        codeSent: (String verificationId, int? resendToken) async {
-
-          PhoneAuthCredential credential =
-          PhoneAuthProvider.credential(verificationId: verificationId, smsCode: otp);
-          await FirebaseAuth.instance.signInWithCredential(credential);
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {
-
-          print('Code auto-retrieval timeout: $verificationId');
-        },
-      );
-    } catch (e) {
-      print('Phone verification error: $e');
-      emit(ErrorVerifyState());
-    }
-  }
-
-  Future<void> PhoneVerifyFirst({required String phoneNumber}) async {
-    try {
-      await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          await FirebaseAuth.instance.signInWithCredential(credential);
-          emit(SuccessVerisyState());
-        },
-        verificationFailed: (FirebaseAuthException e) {
-          String errorMessage = 'Phone verification failed';
-          if (e.code == 'invalid-phone-number') {
-            errorMessage = 'The provided phone number is not valid.';
-          }
-          emit(ErrorVerifyState(errorMessage: errorMessage));
-        },
-        codeSent: (String verificationId, int? resendToken) async {},
-        codeAutoRetrievalTimeout: (String verificationId) {},
-      );
-    } catch (e) {
-      print('Phone verification error: $e');
-      emit(ErrorVerifyState(errorMessage: 'Phone verification error'));
-    }
-  }
-
 
   Future<void> storeUserDataInFirestorephone(String name, String email, String phoneNumber) async {
     try {
