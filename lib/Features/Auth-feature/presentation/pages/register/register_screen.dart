@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sell_4_u/Features/Auth-feature/presentation/pages/register/otp-sceen.dart';
+import 'package:sell_4_u/Features/Home-feature/view/layout.dart';
 import 'package:sell_4_u/Features/Home-feature/view/screens/home/feeds_screen.dart';
 import 'package:sell_4_u/generated/l10n.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
@@ -63,7 +64,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 message:'Register success',
               ),
             );
-            navigatorTo(context, HomeFeeds());
+            navigatorTo(context, LayoutScreen());
 
           }
           if(state is ErrorVerifyState){

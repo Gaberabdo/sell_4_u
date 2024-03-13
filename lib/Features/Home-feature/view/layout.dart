@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconly/iconly.dart';
-import 'package:sell_4_u/Features/Home-feature/Cubit/home-cubit.dart';
-import 'package:sell_4_u/Features/Home-feature/Cubit/home-state.dart';
+import 'package:sell_4_u/Features/Home-feature/Cubit/Layout_cubit/home-cubit.dart';
+import 'package:sell_4_u/Features/Home-feature/Cubit/Layout_cubit/home-state.dart';
 import 'package:sell_4_u/core/helper/component/component.dart';
 
 import '../../../generated/l10n.dart';
@@ -25,6 +25,7 @@ class LayoutScreen extends StatelessWidget {
               elevation: 1,
               backgroundColor: Colors.white,
               centerTitle: true,
+              automaticallyImplyLeading: true,
               title: cubit.selectedIndex ==4 ?null:TextFormWidget(
                 emailController: TextEditingController(),
                 prefixIcon: const Icon(
