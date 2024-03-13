@@ -30,18 +30,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "Phone": MessageLookupByLibrary.simpleMessage("Phone"),
         "alreadyHaveAccount":
             MessageLookupByLibrary.simpleMessage("Already have an account"),
-        "callMe": MessageLookupByLibrary.simpleMessage("Call now"),
         "categories": MessageLookupByLibrary.simpleMessage("Categories"),
         "completeSignUp":
             MessageLookupByLibrary.simpleMessage("Complete Sign Up"),
-        "continueB": MessageLookupByLibrary.simpleMessage("Continue Browsing"),
-        "description": MessageLookupByLibrary.simpleMessage("Description"),
         "donthave":
             MessageLookupByLibrary.simpleMessage("Don\\\'t have an account?"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("Forget Password"),
         "homeWelcome": MessageLookupByLibrary.simpleMessage("Welcome"),
-        "mostP": MessageLookupByLibrary.simpleMessage("Most Popular"),
         "nearYou": MessageLookupByLibrary.simpleMessage("Near you"),
         "pleaseEmail": MessageLookupByLibrary.simpleMessage(
             "please enter your email address"),
@@ -59,6 +55,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sign in With Facebook"),
         "signWithgoogle":
             MessageLookupByLibrary.simpleMessage("Sign in With Google"),
-        "whatsapp": MessageLookupByLibrary.simpleMessage("What\'s app")
+        "verfyEmail": MessageLookupByLibrary.simpleMessage(" Verify Phone")
       };
 }

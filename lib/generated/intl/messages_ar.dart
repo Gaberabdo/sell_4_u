@@ -30,16 +30,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "Phone": MessageLookupByLibrary.simpleMessage("تليفون"),
         "alreadyHaveAccount":
             MessageLookupByLibrary.simpleMessage("لديك حساب بالفعل"),
-        "callMe": MessageLookupByLibrary.simpleMessage("أتصل الان"),
         "categories": MessageLookupByLibrary.simpleMessage("فئات"),
         "completeSignUp": MessageLookupByLibrary.simpleMessage("اكمال التسجيل"),
-        "continueB": MessageLookupByLibrary.simpleMessage("اكمل تصفح"),
-        "description": MessageLookupByLibrary.simpleMessage("الوصف"),
         "donthave": MessageLookupByLibrary.simpleMessage("ليس لديك حساب??"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور"),
         "homeWelcome": MessageLookupByLibrary.simpleMessage("مرحبا بك"),
-        "mostP": MessageLookupByLibrary.simpleMessage("الأكثر شعبية"),
         "nearYou": MessageLookupByLibrary.simpleMessage("بالقرب منك"),
         "pleaseEmail":
             MessageLookupByLibrary.simpleMessage("من فضلك ادخل ايميلك"),
@@ -56,6 +52,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "تسجيل الدخول بأستخدام فيس بوك "),
         "signWithgoogle":
             MessageLookupByLibrary.simpleMessage("تسجيل الدخول بأستخدام جوجل "),
-        "whatsapp": MessageLookupByLibrary.simpleMessage("واتس اب")
+        "verfyEmail": MessageLookupByLibrary.simpleMessage("تفعيل التليفون")
       };
 }
