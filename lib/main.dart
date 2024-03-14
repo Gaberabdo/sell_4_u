@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:sell_4_u/Features/Home-feature/view/layout.dart';
+import 'package:sell_4_u/Features/setting/view/screens/profile_screen.dart';
 import 'package:sell_4_u/core/constant.dart';
 
 import 'core/helper/bloc_observe/observe.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           elevation: 3,
@@ -55,7 +57,7 @@ class MyApp extends StatelessWidget {
 
         ),
       ),
-      home: const LayoutScreen(),
+      home: ProfileScreen(),
         locale: const Locale('en'),
         localizationsDelegates: const [
           S.delegate,
