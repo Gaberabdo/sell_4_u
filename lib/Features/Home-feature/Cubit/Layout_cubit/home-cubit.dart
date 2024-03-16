@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sell_4_u/Features/Home-feature/view/screens/home/create_post.dart';
 import 'package:sell_4_u/Features/Home-feature/view/screens/home/feeds_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sell_4_u/Features/Home-feature/view/screens/home/panner_cat.dart';
+import 'package:sell_4_u/Features/setting/view/screens/profile_screen.dart';
 import 'package:sell_4_u/core/constant.dart';
 import 'package:iconly/iconly.dart';
 
@@ -15,9 +17,9 @@ class HomeCubit extends Cubit<HomeState> {
 
   List<Widget> screens = [
     const FeedsScreen(),
-    const Column(),
+    const BannerCat(),
     const CreatePost(),
-    const Column(),
+    const ProfileScreen(),
   ];
   int selectedIndex = 0;
   List<BottomNavigationBarItem> item = [

@@ -340,21 +340,31 @@ class S {
     );
   }
 
-  /// `Add your details`
+  /// `Please write your details...`
   String get details {
     return Intl.message(
-      'Add your details',
+      'Please write your details...',
       name: 'details',
       desc: '',
       args: [],
     );
   }
 
-  /// `Add your description`
+  /// `Please write your description...`
   String get descriptionAdd {
     return Intl.message(
-      'Add your description',
+      'Please write your description...',
       name: 'descriptionAdd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please write reason to offer...`
+  String get reasonAdd {
+    return Intl.message(
+      'Please write reason to offer...',
+      name: 'reasonAdd',
       desc: '',
       args: [],
     );
@@ -375,6 +385,16 @@ class S {
     return Intl.message(
       ' Resend Otp',
       name: 'resendOtp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` Create Ad`
+  String get createPost {
+    return Intl.message(
+      ' Create Ad',
+      name: 'createPost',
       desc: '',
       args: [],
     );

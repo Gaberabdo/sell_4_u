@@ -35,10 +35,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "completeSignUp":
             MessageLookupByLibrary.simpleMessage("Complete Sign Up"),
         "continueB": MessageLookupByLibrary.simpleMessage("Continue Browsing"),
+        "createPost": MessageLookupByLibrary.simpleMessage(" Create Ad"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
-        "descriptionAdd":
-            MessageLookupByLibrary.simpleMessage("Add your description"),
-        "details": MessageLookupByLibrary.simpleMessage("Add your details"),
+        "descriptionAdd": MessageLookupByLibrary.simpleMessage(
+            "Please write your description..."),
+        "details": MessageLookupByLibrary.simpleMessage(
+            "Please write your details..."),
         "donthave":
             MessageLookupByLibrary.simpleMessage("Don\\\'t have an accounat?"),
         "forgetPassword":
@@ -55,6 +57,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pleasePhone":
             MessageLookupByLibrary.simpleMessage("please enter your phone"),
         "postAd": MessageLookupByLibrary.simpleMessage("Post an Ad"),
+        "reasonAdd": MessageLookupByLibrary.simpleMessage(
+            "Please write reason to offer..."),
         "resendOtp": MessageLookupByLibrary.simpleMessage(" Resend Otp"),
         "search": MessageLookupByLibrary.simpleMessage("Search for anything"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See All"),

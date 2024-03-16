@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:sell_4_u/Features/Auth-feature/presentation/pages/login/login_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:sell_4_u/Features/Home-feature/view/layout.dart';
 import 'package:sell_4_u/Features/Home-feature/view/screens/home/create_post.dart';
 import 'package:sell_4_u/core/constant.dart';
@@ -15,6 +15,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
+  Provider.debugCheckInvalidValueType = null;
+
   await Firebase.initializeApp(
     options: Constant.options,
   );
@@ -44,7 +46,7 @@ class MyApp extends StatelessWidget {
                 fontSize: 10, fontWeight: FontWeight.w400),
             unselectedLabelStyle: FontStyleThame.textStyle(
                 fontSize: 10, fontWeight: FontWeight.w400),
-            unselectedItemColor: ColorStyle.gray,
+            unselectedItemColor:const Color.fromRGBO(207, 207, 206, 1),
             selectedIconTheme: const IconThemeData(
               size: 16,
             ),
@@ -57,7 +59,7 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.white,
             foregroundColor: Colors.black,
           )),
-      home:  LoginScreen(),
+      home: const LayoutScreen(),
       locale: const Locale('en'),
       localizationsDelegates: const [
         S.delegate,

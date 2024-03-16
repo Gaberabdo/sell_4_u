@@ -30,5 +30,8 @@
   "callMe": "أتصل الان",
   "whatsapp": "واتس اب",
   "postAd": "انشر إعلانا",
-  "resendOtp" : "اعادة الارسال"
+  "resendOtp" : "اعادة الارسال",
+  "reasonAdd": "الرجاء كتابة سبب العرض...",
+  "createPost" : " Create Ad"
+
 }

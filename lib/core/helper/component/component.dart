@@ -33,7 +33,7 @@ void navigatorTo(context, Widget) {
       MaterialPageRoute(
         builder: (context) => Widget,
       ),
-      (route) => false);
+          (route) => false);
 }
 
 dynamic uId = '';
@@ -50,6 +50,7 @@ class TextFormWidget extends StatefulWidget {
     this.maxLines,
     this.suffixIcon,
     this.enabled,
+    this.keyboardType,
   });
 
   final TextEditingController emailController;
@@ -61,6 +62,7 @@ class TextFormWidget extends StatefulWidget {
   int? maxLines = 1;
   bool icon;
   Widget? suffixIcon;
+  TextInputType? keyboardType;
 
   @override
   State<TextFormWidget> createState() => _TextFormWidgetState();
@@ -80,7 +82,7 @@ class _TextFormWidgetState extends State<TextFormWidget> {
         enabled: widget.enabled,
         maxLines: widget.maxLines,
         controller: widget.emailController,
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: widget.keyboardType ?? TextInputType.emailAddress,
         obscureText: widget.obscureText,
         onFieldSubmitted: (value) {
           FocusScope.of(context).nextFocus();
@@ -92,26 +94,34 @@ class _TextFormWidgetState extends State<TextFormWidget> {
           return null;
         },
         decoration: InputDecoration(
-            hintText: widget.hintText,
-            prefixIcon: widget.prefixIcon,
-            hintStyle: FontStyleThame.textStyle(
-                fontSize: 14, fontWeight: FontWeight.w400),
-            suffixIcon: widget.icon
-                ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        widget.obscureText = !widget.obscureText;
-                      });
-                    },
-                    icon: widget.obscureText
-                        ? const Icon(Icons.remove_red_eye)
-                        : const Icon(Icons.visibility_off_outlined),
-                  )
-                : null,
-            enabledBorder: InputBorder.none,
-            errorBorder: InputBorder.none,
-            disabledBorder: InputBorder.none,
-            border: InputBorder.none),
+          hintText: widget.hintText,
+          prefixIcon: widget.prefixIcon,
+          hintStyle: FontStyleThame.textStyle(
+              fontSize: 14, fontWeight: FontWeight.w400),
+          suffixIcon: widget.icon
+              ? IconButton(
+            onPressed: () {
+              setState(() {
+                widget.obscureText = !widget.obscureText;
+              });
+            },
+            icon: widget.obscureText
+                ? const Icon(Icons.remove_red_eye)
+                : const Icon(Icons.visibility_off_outlined),
+          )
+              : null,
+          errorMaxLines: widget.maxLines,
+          enabledBorder: InputBorder.none,
+          errorStyle: FontStyleThame.textStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 12,
+          ),
+          errorBorder: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          disabledBorder: InputBorder.none,
+          border: InputBorder.none,
+          focusedErrorBorder: InputBorder.none,
+        ),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:sell_4_u/Features/Auth-feature/manger/model/user_model.dart';
 import 'package:sell_4_u/Features/Home-feature/models/category_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,6 +13,8 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'feeds_state.dart';
 import 'package:intl/intl.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class FeedsCubit extends Cubit<FeedsState> {
   FeedsCubit() : super(FeedsInitial());
@@ -21,6 +24,7 @@ class FeedsCubit extends Cubit<FeedsState> {
   FirebaseFirestore fireStore = FirebaseFirestore.instance;
   List<CategoryModel> catModel = [];
   List<String> catModelIdes = [];
+  List<String> catModelDetailsIdes = [];
 
   Future<void> getCategory() async {
     emit(GetCategoryLoading());
@@ -35,6 +39,33 @@ class FeedsCubit extends Cubit<FeedsState> {
     }).onError((handleError) {
       emit(GetCategoryError());
     });
+  }
+  List<ProductModel> getCategoryDetailsModel = [];
+
+  Future<void> getCategoryDetails(String id) async {
+    emit(GetCategoryLoading());
+    fireStore
+        .collection("categories")
+        .doc(id)
+        .collection('products')
+        .snapshots()
+        .listen((event) {
+      catModel.clear();
+      catModelIdes.clear();
+      for (var element in event.docs) {
+        getCategoryDetailsModel.add(ProductModel.fromJson(element.data()));
+        catModelDetailsIdes.add(element.id);
+      }
+      emit(GetCategorySuccess());
+    }).onError((handleError) {
+      emit(GetCategoryError());
+    });
+  }
+
+  bool isChoose = false;
+ changeState() async {
+
+    emit(ChoosePlans());
   }
 
   List<ProductModel> mostPopularModel = [];
@@ -94,6 +125,7 @@ class FeedsCubit extends Cubit<FeedsState> {
     final pickedImages = await picker.pickMultiImage();
 
     if (pickedImages.isNotEmpty) {
+      imageController.text = '';
       imageList = pickedImages.map((image) => File(image.path)).toList();
       emit(ImageUploadSuccess());
     } else {
@@ -113,56 +145,61 @@ class FeedsCubit extends Cubit<FeedsState> {
     }
   }
 
-  Future<void> uploadImages() async {
-    final storage = FirebaseStorage.instance;
-
+  Future<void> uploadImages({
+    required String uId,
+  }) async {
+    isLoading = true;
     emit(ImageUploadToFireLoading());
+
+    List<File> imagesToRemove = [];
+
     for (var image in imageList) {
-      final ref = storage
+      final ref = firebase_storage.FirebaseStorage.instance
           .ref()
-          .child('users/${Uri.file(image.path).pathSegments.last}');
+          .child('catImage/${Uri.file(image.path).pathSegments.last}');
       await ref.putFile(image).then((p0) {
         p0.ref.getDownloadURL().then((value) {
           postListOfImage.add(value);
           emit(ImageUploadToFireSuccess());
         });
       });
+      imagesToRemove.add(image);
+    }
+
+    for (var image in imagesToRemove) {
       imageList.remove(image);
     }
+
+    emit(ImageRemovedFailed());
+
     if (imageList.isEmpty) {
+      requestPostToFire(uId: uId);
       emit(ImageUploadSuccess());
     }
   }
 
   Future<void> requestPostToFire({
-    required String cat,
-    required String description,
-    required String details,
-    required String reasonOfOffer,
     required String uId,
-    required String location,
-    required String categoriesId,
-    required double lan,
-    required double price,
-    required double numberOfDay,
-    required double lat,
   }) async {
     String formattedDate =
         DateFormat('E MMM d y HH:mm:ss \'GMT\'Z (z)').format(DateTime.now());
     ProductModel model = ProductModel(
-      cat: cat,
+      cat: catController.text,
       images: postListOfImage,
-      description: description,
-      details: details,
-      lan: lan,
-      lat: lat,
-      location: location,
-      price: price,
-      reasonOfOffer: reasonOfOffer,
+      description: descController.text,
+      details: detailController.text,
+      lan: longitude,
+      lat: latitude,
+      location: currentAddress,
+      price: priceController.text,
+      reasonOfOffer: reasonController.text,
       time: formattedDate,
       uId: uId,
-      numberOfDay: numberOfDay,
+      numberOfDay: 30,
+      view: 0,
     );
+    print(model.toMap());
+
     emit(RequestPostToFireLoading());
     fireStore.collection('products').add(model.toMap()).then((value) {
       fireStore
@@ -173,21 +210,22 @@ class FeedsCubit extends Cubit<FeedsState> {
           .then((value) {
         fireStore
             .collection('categories')
-            .doc(categoriesId)
+            .doc(catIdString!)
             .collection('products')
             .add(model.toMap())
             .then((value) {
+          isLoading = false;
           emit(RequestPostToFireSuccess());
         }).catchError((onError) {
-          print('product to cat');
+          print('product to cat $onError');
           emit(RequestPostToFireError());
         });
-      }).then((value) {
-        print('product to user');
+      }).catchError((value) {
+        print('product to user $value');
         emit(RequestPostToFireError());
       });
     }).catchError((onError) {
-      print('product to product');
+      print('product to product $onError');
       emit(RequestPostToFireError());
     });
   }
@@ -199,19 +237,106 @@ class FeedsCubit extends Cubit<FeedsState> {
     emit(ImageUploadFailed());
   }
 
-  String catValueString = 'Select category';
-  String catIdString = '';
+  String catValueString = 'Please select a category';
+  String? catIdString;
 
   void catValueStringCreate({
     required String value,
     required int index,
   }) {
     catValueString = value;
+    catController.text = value;
     catIdString = catModelIdes[index];
     print(catIdString);
     print(catValueString);
+    print(catController.text);
     emit(ImageUploadFailed());
   }
 
-  TextEditingController controller = TextEditingController();
+  double? latitude;
+  double? longitude;
+  Position? currentPosition;
+  String? currentAddress;
+
+  Future<void> getCurrentPosition(context) async {
+    emit(GetLocationLoading());
+
+    final hasPermission = await handleLocationPermission(context);
+
+    if (!hasPermission) return;
+    await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
+        .then((Position position) {
+      currentPosition = position;
+      latitude = position.latitude;
+      longitude = position.longitude;
+      print('${currentPosition}currentPosition');
+      emit(GetLocationSuccess());
+
+      getAddressFromLatLng(currentPosition!);
+    }).catchError((e) {
+      debugPrint(e);
+      emit(GetLocationError());
+    });
+  }
+
+  Future<void> getAddressFromLatLng(Position position) async {
+    emit(GetLocationLoading());
+
+    await placemarkFromCoordinates(
+            currentPosition!.latitude, currentPosition!.longitude)
+        .then((List<Placemark> placemarks) {
+      Placemark place = placemarks[0];
+      currentAddress = place.locality;
+      locationController.text = place.locality!;
+      emit(GetLocationSuccess());
+    }).catchError((e) {
+      emit(GetLocationError());
+
+      debugPrint(e);
+    });
+  }
+
+  Future<bool> handleLocationPermission(context) async {
+    emit(GetLocationLoading());
+    bool serviceEnabled;
+    LocationPermission permission;
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(
+              'Location services are disabled. Please enable the services')));
+      return false;
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      emit(GetLocationSuccess());
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        emit(GetLocationError());
+
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Location permissions are denied')));
+        return false;
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(
+              'Location permissions are permanently denied, we cannot request permissions.')));
+      return false;
+    }
+    return true;
+  }
+
+  TextEditingController reasonController = TextEditingController();
+  TextEditingController detailController = TextEditingController();
+  TextEditingController descController = TextEditingController();
+  TextEditingController imageController = TextEditingController();
+  TextEditingController catController = TextEditingController();
+  TextEditingController locationController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
+
+  var formKey = GlobalKey<FormState>();
+
+  bool isLoading = false;
 }

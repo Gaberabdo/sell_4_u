@@ -28,8 +28,10 @@
   "callMe": "Call now",
   "whatsapp": "What's app",
   "postAd": "Post an Ad",
-  "details": "Add your details",
-  "descriptionAdd": "Add your description",
+  "details": "Please write your details...",
+  "descriptionAdd": "Please write your description...",
+  "reasonAdd": "Please write reason to offer...",
   "verfyEmail" : " Verify Phone",
-  "resendOtp" : " Resend Otp"
+  "resendOtp" : " Resend Otp",
+  "createPost" : " Create Ad"
 }

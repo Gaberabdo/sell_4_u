@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/painting/text_style.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,9 +10,10 @@ import 'package:google_fonts/google_fonts.dart';
 class Constant {
   static FirebaseOptions options = const FirebaseOptions(
     apiKey: "AIzaSyAnpxBKkYo-1NwJitB8j45CZN32TefPeAw",
-    projectId: "sales-b43bd",
-    messagingSenderId: "1016824936796",
     appId: "1:1016824936796:android:87ad558837044ff5536999",
+    messagingSenderId: "1016824936796",
+    projectId: "sales-b43bd",
+    storageBucket: 'sales-b43bd.appspot.com',
   );
 }
 
@@ -101,5 +105,13 @@ int _getMonth(String month) {
       return DateTime.december;
     default:
       throw Exception("Invalid month");
+  }
+}
+
+pickImage() async {
+  final ImagePicker picker = ImagePicker();
+  final file = await picker.pickImage(source: ImageSource.gallery);
+  if (File != null) {
+    return await file?.readAsBytes();
   }
 }

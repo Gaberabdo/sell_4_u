@@ -20,6 +20,8 @@ class GetUserError extends FeedsState {}
 
 class ImageUploadSuccess extends FeedsState {}
 class ImageUploadFailed extends FeedsState {}
+class ImageRemovedFailed extends FeedsState {}
+class RequestLocationPermission extends FeedsState {}
 
 class ImageUploadToFireLoading extends FeedsState {}
 class ImageUploadToFireSuccess extends FeedsState {}
@@ -29,3 +31,13 @@ class ImageUploadToFireSuccess extends FeedsState {}
 class RequestPostToFireLoading extends FeedsState {}
 class RequestPostToFireSuccess extends FeedsState {}
 class RequestPostToFireError extends FeedsState {}
+
+
+class GetLocationLoading extends FeedsState {}
+class GetLocationError extends FeedsState {}
+class GetLocationSuccess extends FeedsState {}
+
+
+
+
+class ChoosePlans extends FeedsState {}

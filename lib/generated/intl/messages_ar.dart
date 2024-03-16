@@ -34,6 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "categories": MessageLookupByLibrary.simpleMessage("فئات"),
         "completeSignUp": MessageLookupByLibrary.simpleMessage("اكمال التسجيل"),
         "continueB": MessageLookupByLibrary.simpleMessage("اكمل تصفح"),
+        "createPost": MessageLookupByLibrary.simpleMessage(" Create Ad"),
         "description": MessageLookupByLibrary.simpleMessage("الوصف"),
         "details": MessageLookupByLibrary.simpleMessage("أضف بياناتك"),
         "donthave": MessageLookupByLibrary.simpleMessage("ليس لديك حساب??"),
@@ -50,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pleasePhone":
             MessageLookupByLibrary.simpleMessage("من فضلك ادخل تليفونك"),
         "postAd": MessageLookupByLibrary.simpleMessage("انشر إعلانا"),
+        "reasonAdd":
+            MessageLookupByLibrary.simpleMessage("الرجاء كتابة سبب العرض..."),
         "resendOtp": MessageLookupByLibrary.simpleMessage("اعادة الارسال"),
         "search": MessageLookupByLibrary.simpleMessage("البحث اي شئ"),
         "seeAll": MessageLookupByLibrary.simpleMessage("اظهار الكل"),
