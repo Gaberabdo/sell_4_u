@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'package:sell_4_u/Features/Home-feature/view/layout.dart';
+import 'package:sell_4_u/Features/setting/model/user_provider.dart';
 import 'package:sell_4_u/Features/setting/view/screens/profile_screen.dart';
 import 'package:sell_4_u/core/constant.dart';
 
@@ -31,41 +33,44 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          elevation: 3,
-          backgroundColor: Colors.white,
-          selectedItemColor: ColorStyle.primaryColor,
-          selectedLabelStyle: FontStyleThame.textStyle(
-            fontSize: 10,
-            fontWeight: FontWeight.w400
-          ),
-          unselectedLabelStyle: FontStyleThame.textStyle(
+    return ChangeNotifierProvider(
+      create: (context)=>UserProvider(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            elevation: 3,
+            backgroundColor: Colors.white,
+            selectedItemColor: ColorStyle.primaryColor,
+            selectedLabelStyle: FontStyleThame.textStyle(
               fontSize: 10,
               fontWeight: FontWeight.w400
-          ),
-          unselectedItemColor: ColorStyle.gray,
-          selectedIconTheme: IconThemeData(
-            size: 16,
-          ),
-          unselectedIconTheme: IconThemeData(
-            size: 16,
-          ),
+            ),
+            unselectedLabelStyle: FontStyleThame.textStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w400
+            ),
+            unselectedItemColor: ColorStyle.gray,
+            selectedIconTheme: IconThemeData(
+              size: 16,
+            ),
+            unselectedIconTheme: IconThemeData(
+              size: 16,
+            ),
 
+          ),
         ),
+        home: ProfileScreen(),
+          locale: const Locale('en'),
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales
       ),
-      home: ProfileScreen(),
-        locale: const Locale('en'),
-        localizationsDelegates: const [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales
     );
   }
 }

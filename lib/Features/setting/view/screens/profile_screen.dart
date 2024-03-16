@@ -1,13 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sell_4_u/Features/setting/model/user_model.dart';
+import 'package:sell_4_u/Features/setting/model/user_provider.dart';
 import 'package:sell_4_u/Features/setting/view/screens/edit_profile.dart';
 import 'package:sell_4_u/Features/setting/view/screens/notifications.dart';
 import 'package:sell_4_u/Features/setting/view/screens/recently_viewed.dart';
 import 'package:sell_4_u/Features/setting/view/screens/saved_searched.dart';
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
   @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+void initState()
+{
+  Provider.of<UserProvider>(context,listen: false).getDetails();
+  super.initState();
+}
+
+
+  @override
   Widget build(BuildContext context) {
+  UserModel userModel=Provider.of<UserProvider>(context).userModel!;
     return Scaffold(
       appBar: AppBar(
         actions:
@@ -46,7 +62,7 @@ class ProfileScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children:
                     [
-                      Text('Hey there',style: TextStyle(
+                      Text(userModel.name,style: TextStyle(
                         fontWeight:FontWeight.bold
                       ),),
                       Text('login to buy and sell anything'),
@@ -119,7 +135,7 @@ class ProfileScreen extends StatelessWidget {
                          width: 1.0,
                          style: BorderStyle.solid),
                    ),
-         
+
                    child: const Row(
                      children:
                      [
@@ -243,7 +259,7 @@ class ProfileScreen extends StatelessWidget {
                        width: 1.0,
                        style: BorderStyle.solid),
                    ),
-         
+
                    child: const Row(
                      children:
                      [
@@ -357,7 +373,7 @@ class ProfileScreen extends StatelessWidget {
                              ),
                            ),
                          ),
-         
+
                        ],
                      ),
                    ],

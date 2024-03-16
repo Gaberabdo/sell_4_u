@@ -1,6 +1,9 @@
 import 'dart:html';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sell_4_u/Features/setting/model/user_model.dart';
+import 'package:sell_4_u/Features/setting/model/user_provider.dart';
 import 'package:sell_4_u/core/helper/component/component.dart';
 class EditProfile extends StatefulWidget {
 
@@ -12,14 +15,16 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   Uint8List? file;
-
   @override
   Widget build(BuildContext context) {
+
+    UserModel userData=Provider.of<UserProvider>(context).userModel!;
     var emailController = TextEditingController();
     var nameController = TextEditingController();
-    var passwordController = TextEditingController();
+    //var passwordController = TextEditingController();
 
-
+    emailController.text=userData.email!;
+    nameController.text=userData.name!;
 
     return Scaffold(
       appBar: AppBar(
@@ -52,11 +57,15 @@ class _EditProfileState extends State<EditProfile> {
                         children:[
                           Stack(
                             children: [
-                           file==null ?Container():   CircleAvatar(
-                                radius: 60,
-                                child: Image(image: MemoryImage(file!),fit: BoxFit.contain,)
+                           file==null ? CircleAvatar(
+                                radius: 65,
+                                backgroundImage: NetworkImage('https://www.freepik.com/free-vector/illustration-user-avatar-icon_2606572.htm#fromView=search&page=1&position=47&uuid=ea28f8ef-cff6-485a-8f1a-efde5332f9a1'),
                                 //backgroundImage: DecorationImage(image: MemoryImage(file)),
-                              ),
+                              )
+                           :CircleAvatar(
+                             radius: 65,
+                             backgroundImage: MemoryImage(file!),
+                           ),
                               IconButton(
                                   onPressed: ()async {
                                     Uint8List myFile=await pickImage();
@@ -216,6 +225,7 @@ class _EditProfileState extends State<EditProfile> {
               height: 20,
             ),
         TextFormField(
+          controller: nameController,
           keyboardType: TextInputType.name,
           decoration: InputDecoration(
             prefixIcon: Icon(Icons.person),
