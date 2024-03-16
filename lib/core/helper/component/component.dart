@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sell_4_u/core/constant.dart';
 
 class Buttonhelper extends StatelessWidget {
@@ -111,5 +114,15 @@ class _TextFormWidgetState extends State<TextFormWidget> {
             disabledBorder: InputBorder.none),
       ),
     );
+  }
+}
+
+
+ pickImage()async
+{
+  final ImagePicker picker = ImagePicker();
+  XFile? file  = await picker.pickImage(source: ImageSource.gallery);
+  if( File!=null) {
+   return await file?.readAsBytes();
   }
 }

@@ -42,6 +42,7 @@ dependencies:
   dio: ^5.4.1
   responsive_grid: ^2.4.4
   auto_height_grid_view: ^1.0.0
+  image_picker: ^1.0.7
   conditional_builder_null_safety: ^0.0.6
   google_fonts: ^5.1.0
   iconly: ^1.0.1

@@ -1,15 +1,25 @@
+import 'dart:html';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:sell_4_u/core/helper/component/component.dart';
-class EditProfile extends StatelessWidget {
+class EditProfile extends StatefulWidget {
 
   const EditProfile({Key? key}) : super(key: key);
 
+  @override
+  State<EditProfile> createState() => _EditProfileState();
+}
+
+class _EditProfileState extends State<EditProfile> {
+  Uint8List? file;
 
   @override
   Widget build(BuildContext context) {
     var emailController = TextEditingController();
     var nameController = TextEditingController();
     var passwordController = TextEditingController();
+
+
 
     return Scaffold(
       appBar: AppBar(
@@ -42,14 +52,23 @@ class EditProfile extends StatelessWidget {
                         children:[
                           Stack(
                             children: [
-                              const CircleAvatar(
+                           file==null ?Container():   CircleAvatar(
                                 radius: 60,
+                                child: Image(image: MemoryImage(file!),fit: BoxFit.contain,)
+                                //backgroundImage: DecorationImage(image: MemoryImage(file)),
                               ),
-                              IconButton(onPressed: (){}, icon:const Icon(Icons.mode_edit_outline_sharp))
-        
+                              IconButton(
+                                  onPressed: ()async {
+                                    Uint8List myFile=await pickImage();
+                                setState(() {
+                                 file= myFile;
+                                });
+
+                              }, icon:const Icon(Icons.mode_edit_outline_sharp))
+
                             ],
                           ),
-        
+
                             ],
                       ),
                     ],
@@ -204,11 +223,18 @@ class EditProfile extends StatelessWidget {
             border: OutlineInputBorder(),
           ),
         ),
-            SizedBox(
+            const SizedBox(
               height: 13,
             ),
             TextFormField(
+              controller: emailController,
               keyboardType: TextInputType.emailAddress,
+           validator: (String? value){
+                if(value!.isEmpty){
+                  return 'must not be empty';
+                }
+                return null;
+            },
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.email),
                 labelText: 'Email',
