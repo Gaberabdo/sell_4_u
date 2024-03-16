@@ -30,12 +30,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "Phone": MessageLookupByLibrary.simpleMessage("تليفون"),
         "alreadyHaveAccount":
             MessageLookupByLibrary.simpleMessage("لديك حساب بالفعل"),
+        "callMe": MessageLookupByLibrary.simpleMessage("أتصل الان"),
         "categories": MessageLookupByLibrary.simpleMessage("فئات"),
         "completeSignUp": MessageLookupByLibrary.simpleMessage("اكمال التسجيل"),
+        "continueB": MessageLookupByLibrary.simpleMessage("اكمل تصفح"),
+        "description": MessageLookupByLibrary.simpleMessage("الوصف"),
+        "details": MessageLookupByLibrary.simpleMessage("أضف بياناتك"),
         "donthave": MessageLookupByLibrary.simpleMessage("ليس لديك حساب??"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور"),
         "homeWelcome": MessageLookupByLibrary.simpleMessage("مرحبا بك"),
+        "mostP": MessageLookupByLibrary.simpleMessage("الأكثر شعبية"),
         "nearYou": MessageLookupByLibrary.simpleMessage("بالقرب منك"),
         "pleaseEmail":
             MessageLookupByLibrary.simpleMessage("من فضلك ادخل ايميلك"),
@@ -44,6 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("من فضلك ادخل الباسورد"),
         "pleasePhone":
             MessageLookupByLibrary.simpleMessage("من فضلك ادخل تليفونك"),
+        "postAd": MessageLookupByLibrary.simpleMessage("انشر إعلانا"),
+        "resendOtp": MessageLookupByLibrary.simpleMessage("اعادة الارسال"),
         "search": MessageLookupByLibrary.simpleMessage("البحث اي شئ"),
         "seeAll": MessageLookupByLibrary.simpleMessage("اظهار الكل"),
         "sign": MessageLookupByLibrary.simpleMessage("تسجيل  "),
@@ -52,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "تسجيل الدخول بأستخدام فيس بوك "),
         "signWithgoogle":
             MessageLookupByLibrary.simpleMessage("تسجيل الدخول بأستخدام جوجل "),
-        "verfyEmail": MessageLookupByLibrary.simpleMessage("تفعيل التليفون")
+        "verfyEmail": MessageLookupByLibrary.simpleMessage("تفعيل الايميل"),
+        "whatsapp": MessageLookupByLibrary.simpleMessage("واتس اب")
       };
 }

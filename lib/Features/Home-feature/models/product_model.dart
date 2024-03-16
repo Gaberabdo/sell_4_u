@@ -1,34 +1,34 @@
 class ProductModel {
-
-
-  final int view;
-  final String time;
-  final List<String> images;
-  final String cat;
-  final double lat;
-  final double lan;
-  final String reasonOfOffer;
-  final String description;
-  final String location;
-  final String details;
-  final String price;
-  final String uId;
-  final bool fave;
+  final int? view;
+  final String? time;
+  final List<String>? images;
+  final String? cat;
+  final double? lat;
+  final double? lan;
+  final String? reasonOfOffer;
+  final String? description;
+  final String? location;
+  final String? details;
+  final dynamic price;
+  final dynamic numberOfDay;
+  final String? uId;
+  final bool? fave;
 
   ProductModel({
-    required this.view,
-    required this.time,
-    required this.images,
-    required this.cat,
-    required this.lat,
-    required this.lan,
-    required this.reasonOfOffer,
-    required this.description,
-    required this.location,
-    required this.details,
-    required this.price,
-    required this.uId,
-    required this.fave,
+    this.view,
+    this.time,
+    this.images,
+    this.cat,
+    this.lat,
+    this.lan,
+    this.reasonOfOffer,
+    this.description,
+    this.location,
+    this.details,
+    this.price,
+    this.numberOfDay,
+    this.uId,
+    this.fave,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -46,6 +46,7 @@ class ProductModel {
       location: json['location'],
       uId: json['uId'],
       fave: json['fave'],
+      numberOfDay: json['numberOfDay'],
     );
   }
 
@@ -64,6 +65,7 @@ class ProductModel {
       'location': location,
       'uId': uId,
       'fave': fave,
+      'numberOfDay': numberOfDay,
     };
   }
 

@@ -20,7 +20,7 @@ bool isArabic() {
 class ColorStyle {
   static Color primaryColor = const Color.fromRGBO(13, 110, 253, 1);
   static Color secondColor = const Color.fromRGBO(255, 112, 41, 1);
-  static Color gray = const Color.fromRGBO(207, 207, 206, 1);
+  static Color gray = const Color.fromRGBO(242, 242, 242, 1);
 }
 
 class FontStyleThame {
@@ -52,12 +52,12 @@ String transform(String value) {
   int seconds = int.parse(timeParts[2]);
 
   DateTime date =
-  DateTime(year, _getMonth(month), day, hours, minutes, seconds);
+      DateTime(year, _getMonth(month), day, hours, minutes, seconds);
 
   DateTime now = DateTime.now();
   int diffInSeconds =
-  ((now.millisecondsSinceEpoch - date.millisecondsSinceEpoch) / 1000)
-      .floor();
+      ((now.millisecondsSinceEpoch - date.millisecondsSinceEpoch) / 1000)
+          .floor();
 
   if (diffInSeconds < 60) {
     return 'Just now';

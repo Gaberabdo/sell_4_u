@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:sell_4_u/Features/Auth-feature/presentation/pages/login/login_screen.dart';
 import 'package:sell_4_u/Features/Home-feature/view/layout.dart';
+import 'package:sell_4_u/Features/Home-feature/view/screens/home/create_post.dart';
 import 'package:sell_4_u/core/constant.dart';
 
 import 'core/helper/bloc_observe/observe.dart';
@@ -31,9 +33,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
           bottomNavigationBarTheme: BottomNavigationBarThemeData(
             elevation: 3,
             backgroundColor: Colors.white,
@@ -43,28 +45,27 @@ class MyApp extends StatelessWidget {
             unselectedLabelStyle: FontStyleThame.textStyle(
                 fontSize: 10, fontWeight: FontWeight.w400),
             unselectedItemColor: ColorStyle.gray,
-            selectedIconTheme: IconThemeData(
+            selectedIconTheme: const IconThemeData(
               size: 16,
             ),
-            unselectedIconTheme: IconThemeData(
+            unselectedIconTheme: const IconThemeData(
               size: 16,
             ),
           ),
           scaffoldBackgroundColor: Colors.white,
-          appBarTheme: AppBarTheme(
+          appBarTheme: const AppBarTheme(
             backgroundColor: Colors.white,
             foregroundColor: Colors.black,
-          )
-        ),
-        home: const LayoutScreen(),
-        locale: const Locale('en'),
-        localizationsDelegates: const [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales);
+          )),
+      home:  LoginScreen(),
+      locale: const Locale('en'),
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+    );
   }
 }
-

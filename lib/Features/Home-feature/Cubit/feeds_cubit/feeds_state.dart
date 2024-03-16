@@ -15,3 +15,17 @@ class GetMostPopularError extends FeedsState {}
 class GetUserLoading extends FeedsState {}
 class GetUserSuccess extends FeedsState {}
 class GetUserError extends FeedsState {}
+
+
+
+class ImageUploadSuccess extends FeedsState {}
+class ImageUploadFailed extends FeedsState {}
+
+class ImageUploadToFireLoading extends FeedsState {}
+class ImageUploadToFireSuccess extends FeedsState {}
+
+
+
+class RequestPostToFireLoading extends FeedsState {}
+class RequestPostToFireSuccess extends FeedsState {}
+class RequestPostToFireError extends FeedsState {}

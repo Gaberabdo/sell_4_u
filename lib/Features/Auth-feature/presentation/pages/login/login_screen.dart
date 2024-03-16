@@ -1,6 +1,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
+import 'package:sell_4_u/generated/l10n.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sell_4_u/Features/Auth-feature/presentation/pages/register/phone%20screen.dart';
 import 'package:sell_4_u/Features/Home-feature/view/layout.dart';
-import 'package:sell_4_u/Features/Home-feature/view/screens/home/feeds_screen.dart';
+
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
@@ -30,58 +30,75 @@ class LoginScreen extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
 
 
-  Future<void> signInWithFacebook() async {
-    try {
-      final LoginResult result = await FacebookAuth.instance.login();
 
-      if (result.status == LoginStatus.success) {
-        final AccessToken? accessToken = result.accessToken;
-        final AuthCredential credential =
-        FacebookAuthProvider.credential(accessToken!.token);
-
-
-        final UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithCredential(credential);
-
-
-        final User? user = userCredential.user;
-        print("Firebase User ID: ${user?.uid}");
-        print("Firebase User Display Name: ${user?.displayName}");
-        print("Firebase User Email: ${user?.email}");
-        print("Firebase User Photo URL: ${user?.photoURL}");
-
-
-      } else {
-        print("Facebook login failed. Status: ${result.status}");
-      }
-    } catch (e) {
-      print("Error during Facebook authentication: $e");
-    }
-  }
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => LoginCubit(),
       child: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
-          if(state is SuccessLoginState){
+          if(state is SuccessGoogleLoginState){
             showTopSnackBar(
               Overlay.of(context),
-              const CustomSnackBar.success(
+              CustomSnackBar.success(
                 message:'Login success',
               ),
             );
-            navigatorTo(context, const LayoutScreen());
+            navigatorTo(context, LayoutScreen());
+
+          }
+          if(state is SuccessLoginState){
+            showTopSnackBar(
+              Overlay.of(context),
+              CustomSnackBar.success(
+                message:'Login success',
+              ),
+            );
+            navigatorTo(context, LayoutScreen());
+
+          }
+          if(state is SuccessFaceLoginState){
+            showTopSnackBar(
+              Overlay.of(context),
+              CustomSnackBar.success(
+                message:'Login success',
+              ),
+            );
+            navigatorTo(context, LayoutScreen());
+
+          }
+          if(state is UsernotRegister){
+            showTopSnackBar(
+              Overlay.of(context),
+              CustomSnackBar.error(
+                message:'Please Register',
+              ),
+            );
+            Navigator.push(context, MaterialPageRoute(builder: (context){
+              return PhoneScreen();
+            }));
+
+          }
+          if(state is PhoneNotRegisterstate){
+            showTopSnackBar(
+              Overlay.of(context),
+              CustomSnackBar.error(
+                message:'Please Register',
+              ),
+            );
+          Navigator.push(context, MaterialPageRoute(builder: (context){
+            return PhoneScreen();
+          }));
 
           }
           if(state is ErrorLoginState){
             showTopSnackBar(
               Overlay.of(context),
-              const CustomSnackBar.error(
+              CustomSnackBar.error(
                 message:'Login Error',
               ),
             );
-            navigatorTo(context, const LayoutScreen());
+
 
           }
         },
@@ -207,7 +224,7 @@ class LoginScreen extends StatelessWidget {
                                   onPressed: () async{
 
                                     if (formKey.currentState!.validate()) {
-
+                                      cubit.login2('${emailController.text}@gmail.com', passwordController.text);
 
                                     }
 
@@ -237,7 +254,7 @@ class LoginScreen extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                const Expanded(
+                                Expanded(
                                   child: Divider(
                                     height: 1,
 
@@ -245,12 +262,12 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(S.of(context).Or,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       fontSize: 16
 
                                   ),
                                 ),
-                                const Expanded(
+                                Expanded(
                                   child: Divider(
                                     height: 1,
 
@@ -276,12 +293,12 @@ class LoginScreen extends StatelessWidget {
                                   child: Container(
                                     height: 55,
                                     width: 55,
-                                    padding: const EdgeInsets.all(8),
+                                    padding: EdgeInsets.all(8),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(12),
                                         color: Colors.grey.shade300
                                     ),
-                                    child: const Center(child: FaIcon(FontAwesomeIcons.facebook,size: 35,)),
+                                    child: Center(child: FaIcon(FontAwesomeIcons.facebook,size: 35,)),
                                   ),
                                 ),
                                 const SizedBox(
@@ -294,12 +311,12 @@ class LoginScreen extends StatelessWidget {
                                   child: Container(
                                     height: 55,
                                     width: 55,
-                                    padding: const EdgeInsets.all(8),
+                                    padding: EdgeInsets.all(8),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(12),
                                         color: Colors.grey.shade300
                                     ),
-                                    child: const Center(child: FaIcon(FontAwesomeIcons.google,size: 30,)),
+                                    child: Center(child: FaIcon(FontAwesomeIcons.google,size: 30,)),
                                   ),
                                 ),
 

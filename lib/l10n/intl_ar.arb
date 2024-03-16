@@ -6,6 +6,7 @@
   "continueB": "اكمل تصفح",
   "mostP": "الأكثر شعبية",
   "description": "الوصف",
+  "details": "أضف بياناتك",
   "CreateAccount": "انشاء حساب",
   "Name": "الاسم",
   "Phone": "تليفون",
@@ -27,6 +28,7 @@
   "verfyEmail": "تفعيل الايميل",
   "homeWelcome": "مرحبا بك",
   "callMe": "أتصل الان",
-  "whatsapp": "واتس اب"
-
+  "whatsapp": "واتس اب",
+  "postAd": "انشر إعلانا",
+  "resendOtp" : "اعادة الارسال"
 }

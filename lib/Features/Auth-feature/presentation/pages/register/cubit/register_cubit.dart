@@ -6,7 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sell_4_u/Features/Auth-feature/presentation/pages/register/cubit/register_states.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
+import '../../../../../../core/helper/component/component.dart';
+import '../../../../../Home-feature/view/layout.dart';
 import '../../../../manger/model/user_model.dart';
 
 
@@ -141,89 +145,57 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   ///sign up using phone
-  Future<void> PhoneVerify({
-    required String phoneNumber,
-    required String otp,
-    required String name,
-    required String email,
-  }) async {
+
+  Future<void> storeUserDataInFirestorephone({
+    required String email,required String password,required String name,required BuildContext context,
+    required String phoneNumber
+}) async {
     try {
-      await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
-        verificationCompleted: (PhoneAuthCredential credential) async {
-
-          await FirebaseAuth.instance.signInWithCredential(credential);
-          await storeUserDataInFirestorephone(name, email, phoneNumber);
-          emit(SuccessVerisyState());
-        },
-        verificationFailed: (FirebaseAuthException e) {
-
-          print('Verification failed: ${e.message}');
-          emit(ErrorVerifyState());
-        },
-        codeSent: (String verificationId, int? resendToken) async {
-
-          PhoneAuthCredential credential =
-          PhoneAuthProvider.credential(verificationId: verificationId, smsCode: otp);
-          await FirebaseAuth.instance.signInWithCredential(credential);
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {
-
-          print('Code auto-retrieval timeout: $verificationId');
-        },
-      );
-    } catch (e) {
-      print('Phone verification error: $e');
-      emit(ErrorVerifyState());
-    }
-  }
-
-  Future<void> PhoneVerifyFirst({required String phoneNumber}) async {
-    try {
-      await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          await FirebaseAuth.instance.signInWithCredential(credential);
-          emit(SuccessVerisyState());
-        },
-        verificationFailed: (FirebaseAuthException e) {
-          String errorMessage = 'Phone verification failed';
-          if (e.code == 'invalid-phone-number') {
-            errorMessage = 'The provided phone number is not valid.';
-          }
-          emit(ErrorVerifyState(errorMessage: errorMessage));
-        },
-        codeSent: (String verificationId, int? resendToken) async {},
-        codeAutoRetrievalTimeout: (String verificationId) {},
-      );
-    } catch (e) {
-      print('Phone verification error: $e');
-      emit(ErrorVerifyState(errorMessage: 'Phone verification error'));
-    }
-  }
-
-
-  Future<void> storeUserDataInFirestorephone(String name, String email, String phoneNumber) async {
-    try {
-
       final CollectionReference users = FirebaseFirestore.instance.collection('users');
-      UserModel model=UserModel(
-          name: name,
-          email: email,
-          phone: phoneNumber,
-          uId:FirebaseAuth.instance.currentUser!.uid!
+      UserModel model = UserModel(
+        name: name,
+        email: email,
+        phone: phoneNumber,
+        image: 'https://www.freepik.com/free-vector/illustration-user-avatar-icon_2606572.htm#fromView=search&page=1&position=47&uuid=ea28f8ef-cff6-485a-8f1a-efde5332f9a1',
+        uId: FirebaseAuth.instance.currentUser!.uid,
       );
-
-      await users.doc(FirebaseAuth.instance.currentUser!.uid!).set({
-        model.toMap()
-
-      });
-      emit(SuccessRegisterState());
+      await users.doc(model.uId).set(model.toMap());
 
       print('User data stored in Firestore');
+      showTopSnackBar(
+        Overlay.of(context),
+        CustomSnackBar.success(
+          message: 'Verification success',
+        ),
+      );
+      navigatorTo(context, LayoutScreen());
     } catch (e) {
-      emit(ErrorRegisterState());
       print('Error storing user data in Firestore: $e');
+    }
+  }
+
+  ///
+  User ?_firebaseUser;
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  Future<void> registerWithEmailPassword({
+    required String email,required String password,required String name,required BuildContext context,
+    required String phone
+}) async {
+    try {
+
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+
+      _firebaseUser = userCredential.user;
+
+      storeUserDataInFirestorephone(password: password,name: name,email: email,phoneNumber: phone,context: context);
+      print('User registered with email: ${_firebaseUser!.email}');
+    } catch (e) {
+      // Handle registration errors
+      print('Error registering user: ${e.toString()}');
     }
   }
 

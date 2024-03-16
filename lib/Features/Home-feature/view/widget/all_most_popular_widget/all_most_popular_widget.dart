@@ -25,7 +25,7 @@ class MostPopular extends StatelessWidget {
               width: double.infinity,
               fit: BoxFit.fill,
               image: NetworkImage(
-                model.images.first,
+                model.images!.first,
                 scale: 1,
               ),
             ),

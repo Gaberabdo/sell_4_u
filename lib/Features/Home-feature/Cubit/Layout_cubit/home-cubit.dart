@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sell_4_u/Features/Home-feature/view/screens/home/create_post.dart';
 import 'package:sell_4_u/Features/Home-feature/view/screens/home/feeds_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sell_4_u/core/constant.dart';
@@ -15,8 +16,7 @@ class HomeCubit extends Cubit<HomeState> {
   List<Widget> screens = [
     const FeedsScreen(),
     const Column(),
-    const Column(),
-    const Column(),
+    const CreatePost(),
     const Column(),
   ];
   int selectedIndex = 0;
@@ -33,10 +33,7 @@ class HomeCubit extends Cubit<HomeState> {
       icon: const Icon(Icons.add_to_photos_outlined),
       label: isArabic() ? 'أضف إعلانات' : 'Post an Ad',
     ),
-    BottomNavigationBarItem(
-      icon: const Icon(IconlyLight.search),
-      label: isArabic() ? 'البحث' : 'Search',
-    ),
+
     BottomNavigationBarItem(
       icon: const Icon(Icons.account_circle_outlined),
       label: isArabic() ? 'حسابي' : 'Account',

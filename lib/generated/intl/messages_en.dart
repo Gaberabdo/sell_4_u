@@ -30,14 +30,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "Phone": MessageLookupByLibrary.simpleMessage("Phone"),
         "alreadyHaveAccount":
             MessageLookupByLibrary.simpleMessage("Already have an account"),
+        "callMe": MessageLookupByLibrary.simpleMessage("Call now"),
         "categories": MessageLookupByLibrary.simpleMessage("Categories"),
         "completeSignUp":
             MessageLookupByLibrary.simpleMessage("Complete Sign Up"),
+        "continueB": MessageLookupByLibrary.simpleMessage("Continue Browsing"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "descriptionAdd":
+            MessageLookupByLibrary.simpleMessage("Add your description"),
+        "details": MessageLookupByLibrary.simpleMessage("Add your details"),
         "donthave":
-            MessageLookupByLibrary.simpleMessage("Don\\\'t have an account?"),
+            MessageLookupByLibrary.simpleMessage("Don\\\'t have an accounat?"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("Forget Password"),
         "homeWelcome": MessageLookupByLibrary.simpleMessage("Welcome"),
+        "mostP": MessageLookupByLibrary.simpleMessage("Most Popular"),
         "nearYou": MessageLookupByLibrary.simpleMessage("Near you"),
         "pleaseEmail": MessageLookupByLibrary.simpleMessage(
             "please enter your email address"),
@@ -47,6 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("please enter your password"),
         "pleasePhone":
             MessageLookupByLibrary.simpleMessage("please enter your phone"),
+        "postAd": MessageLookupByLibrary.simpleMessage("Post an Ad"),
+        "resendOtp": MessageLookupByLibrary.simpleMessage(" Resend Otp"),
         "search": MessageLookupByLibrary.simpleMessage("Search for anything"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See All"),
         "sign": MessageLookupByLibrary.simpleMessage("Sign Up"),
@@ -55,6 +64,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sign in With Facebook"),
         "signWithgoogle":
             MessageLookupByLibrary.simpleMessage("Sign in With Google"),
-        "verfyEmail": MessageLookupByLibrary.simpleMessage(" Verify Phone")
+        "verfyEmail": MessageLookupByLibrary.simpleMessage(" Verify Phone"),
+        "whatsapp": MessageLookupByLibrary.simpleMessage("What\'s app")
       };
 }

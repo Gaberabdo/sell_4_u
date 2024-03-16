@@ -47,6 +47,7 @@ class TextFormWidget extends StatefulWidget {
     required this.validator,
     required this.obscureText,
     required this.icon,
+    this.maxLines,
     this.suffixIcon,
     this.enabled,
   });
@@ -57,6 +58,7 @@ class TextFormWidget extends StatefulWidget {
   final String validator;
   bool obscureText;
   bool? enabled = true;
+  int? maxLines = 1;
   bool icon;
   Widget? suffixIcon;
 
@@ -76,6 +78,7 @@ class _TextFormWidgetState extends State<TextFormWidget> {
       child: TextFormField(
         cursorColor: Colors.blue,
         enabled: widget.enabled,
+        maxLines: widget.maxLines,
         controller: widget.emailController,
         keyboardType: TextInputType.emailAddress,
         obscureText: widget.obscureText,
@@ -107,7 +110,8 @@ class _TextFormWidgetState extends State<TextFormWidget> {
                 : null,
             enabledBorder: InputBorder.none,
             errorBorder: InputBorder.none,
-            disabledBorder: InputBorder.none),
+            disabledBorder: InputBorder.none,
+            border: InputBorder.none),
       ),
     );
   }

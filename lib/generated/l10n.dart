@@ -50,16 +50,6 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Welcome`
-  String get homeWelcome {
-    return Intl.message(
-      'Welcome',
-      name: 'homeWelcome',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Search for anything`
   String get search {
     return Intl.message(
@@ -105,6 +95,26 @@ class S {
     return Intl.message(
       'CreateAccount',
       name: 'CreateAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue Browsing`
+  String get continueB {
+    return Intl.message(
+      'Continue Browsing',
+      name: 'continueB',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Most Popular`
+  String get mostP {
+    return Intl.message(
+      'Most Popular',
+      name: 'mostP',
       desc: '',
       args: [],
     );
@@ -250,10 +260,10 @@ class S {
     );
   }
 
-  /// `Don\'t have an account?`
+  /// `Don\'t have an accounat?`
   String get donthave {
     return Intl.message(
-      'Don\\\'t have an account?',
+      'Don\\\'t have an accounat?',
       name: 'donthave',
       desc: '',
       args: [],
@@ -280,11 +290,91 @@ class S {
     );
   }
 
+  /// `Welcome`
+  String get homeWelcome {
+    return Intl.message(
+      'Welcome',
+      name: 'homeWelcome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Call now`
+  String get callMe {
+    return Intl.message(
+      'Call now',
+      name: 'callMe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What's app`
+  String get whatsapp {
+    return Intl.message(
+      'What\'s app',
+      name: 'whatsapp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Post an Ad`
+  String get postAd {
+    return Intl.message(
+      'Post an Ad',
+      name: 'postAd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add your details`
+  String get details {
+    return Intl.message(
+      'Add your details',
+      name: 'details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add your description`
+  String get descriptionAdd {
+    return Intl.message(
+      'Add your description',
+      name: 'descriptionAdd',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// ` Verify Phone`
   String get verfyEmail {
     return Intl.message(
       ' Verify Phone',
       name: 'verfyEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` Resend Otp`
+  String get resendOtp {
+    return Intl.message(
+      ' Resend Otp',
+      name: 'resendOtp',
       desc: '',
       args: [],
     );

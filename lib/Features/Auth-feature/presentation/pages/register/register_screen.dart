@@ -265,7 +265,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   onPressed: () {
                                     if (globalFormKey.currentState!.validate()) {
 
-                                     navigatorTo(context, OtpScreen(phoneNumber: '+20${phoneController.text}',email: emailController.text,name: nameController.text,));
+
+                                    Navigator.push(context, MaterialPageRoute(builder: (context){
+
+                                      return OtpScreen(phoneNumber: '+20${phoneController.text}',email: '${phoneController.text}@gmail.com',name: nameController.text,password: passwordController.text,);
+                                    }));
                                     }
                                   },
 

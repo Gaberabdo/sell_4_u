@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +20,7 @@ class HomeFeedsDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => FeedsCubit()..getUserData(id: model.uId),
+      create: (context) => FeedsCubit()..getUserData(id: model.uId!),
       child: BlocConsumer<FeedsCubit, FeedsState>(
         listener: (context, state) {
           // TODO: implement listener
@@ -67,7 +66,7 @@ class HomeFeedsDetails extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CarouselSlider(
-                    items: model.images.asMap().entries.map(
+                    items: model.images!.asMap().entries.map(
                       (e) {
                         final index = e.key;
                         final imageUrl = e.value;
@@ -93,7 +92,7 @@ class HomeFeedsDetails extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     const Icon(Icons.image),
-                                    Text('${index + 1}/${model.images.length}')
+                                    Text('${index + 1}/${model.images!.length}')
                                   ],
                                 ),
                               ),
@@ -172,7 +171,7 @@ class HomeFeedsDetails extends StatelessWidget {
                                 width: 8,
                               ),
                               Text(
-                                transform(model.time),
+                                transform(model.time!),
                                 style: FontStyleThame.textStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -190,7 +189,7 @@ class HomeFeedsDetails extends StatelessWidget {
                                 width: 8,
                               ),
                               Text(
-                                model.cat,
+                                model.cat!,
                                 style: FontStyleThame.textStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
@@ -203,7 +202,7 @@ class HomeFeedsDetails extends StatelessWidget {
                             height: 12,
                           ),
                           Text(
-                            model.reasonOfOffer,
+                            model.reasonOfOffer!,
                             style: FontStyleThame.textStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -269,7 +268,7 @@ class HomeFeedsDetails extends StatelessWidget {
                             height: 100,
                             width: double.infinity,
                             child: Text(
-                              model.description,
+                              model.description!,
                               overflow: TextOverflow.ellipsis,
                               style: FontStyleThame.textStyle(
                                 fontSize: 15,
@@ -367,7 +366,6 @@ class HomeFeedsDetails extends StatelessWidget {
                 children: [
                   Expanded(
                     flex: 3,
-
                     child: SizedBox(
                       height: 44,
                       child: ElevatedButton(
@@ -456,8 +454,7 @@ class HomeFeedsDetails extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                           )),
                         ),
-                        onPressed: () {
-                        },
+                        onPressed: () {},
                         child: Icon(IconlyLight.chat),
                       ),
                     ),
